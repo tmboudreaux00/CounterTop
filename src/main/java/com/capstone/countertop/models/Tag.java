@@ -9,7 +9,12 @@ import java.util.Date;
 @Entity
 @Table(name="Tags")
 public class Tag {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @Column(nullable = false)
+    private String name;
 
 
 
