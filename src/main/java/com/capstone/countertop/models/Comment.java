@@ -1,4 +1,4 @@
 package com.capstone.countertop.models;
 
-public class Post {
+public class Comment {
 }
