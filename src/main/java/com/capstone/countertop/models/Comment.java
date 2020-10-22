@@ -37,6 +37,8 @@ public class Comment {
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
+    public Comment() {}
+
     public Comment(long id,
                    Comment parentComment,
                    Date date,

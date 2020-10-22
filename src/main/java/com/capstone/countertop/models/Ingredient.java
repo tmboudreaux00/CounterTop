@@ -15,6 +15,8 @@ public class Ingredient {
     @Column
     private long apiId;
 
+    public Ingredient (){}
+
     public Ingredient(long id, String name, long apiId) {
         this.id = id;
         this.name = name;

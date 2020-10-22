@@ -35,6 +35,11 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private List<Comment> comments;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersFavorites")
+    private List<User> users;
+
+    public Recipe() {}
+
     public Recipe(long id,
                   @Size(min = 10, max = 10000) String description,
                   @Size(min = 4, max = 100) String name,

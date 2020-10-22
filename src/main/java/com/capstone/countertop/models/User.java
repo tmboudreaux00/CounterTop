@@ -46,7 +46,15 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> comments;
 
+    @ManyToMany
+    @JoinTable(
+            name="users_favorites",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="recipe_id")}
+    )
+    private List<Recipe> usersFavorites;
 
+    public User() {}
 
     public User(long id, String email,
                 @Size(min = 3, max = 24) String username,
