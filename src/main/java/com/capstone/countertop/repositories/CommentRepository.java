@@ -9,8 +9,10 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 
-    Comment getOne(long id);
+    Comment getOne(Long id);
 
-    @Query("FROM comments c WHERE c.comment_body LIKE %:term%") //c.text references text field for comments - may need to be changed
+    @Query("FROM comments c WHERE c.comment_body LIKE %:term%")
     List<Comment> searchByDescriptionLike(@Param("term") String term);
+
+    List<Comment> findAllByDate(Date date);
 }
