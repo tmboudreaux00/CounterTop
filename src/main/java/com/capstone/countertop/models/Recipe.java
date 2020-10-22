@@ -38,6 +38,9 @@ public class Recipe {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersFavorites")
     private List<User> users;
 
+    @OneToMany(cascade= CascadeType.ALL, mappedBy = "recipe")
+    private List<Like> likes;
+
     public Recipe() {}
 
     public Recipe(long id,
