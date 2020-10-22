@@ -3,7 +3,48 @@
 <head th:replace="partials :: head (title='Countertop')"></head>
 <body>
     <nav th:replace="partials :: navbar"></nav>
-    <h1>HOME PAGE</h1>
+    <h1 class="text-center">Countertop</h1>
+    <h2 class="text-center mb-5">For all your recipe needs</h2>
+
+    <h3 class="text-center">Search for a recipe!</h3>
+    <form class="w-50 mx-auto">
+        <div class="form-group">
+            <input type="text" class="form-control" id="main_search" placeholder="recipe here :)">
+        </div>
+    </form>
+
+    <h3 class="text-center mt-5">Checkout this weeks most popular recipes!</h3>
+    <div class="mx-auto w-75 d-flex justify-content-around">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <h4>Like what you see?</h4>
+        <a href="/register">Join Now!</a>
+    </div>
 
     <div th:replace="partials :: scripts"></div>
 </body>
