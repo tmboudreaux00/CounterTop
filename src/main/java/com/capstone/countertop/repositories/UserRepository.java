@@ -4,5 +4,6 @@ import com.capstone.countertop.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    User getOne(long id);
     User findByUsername(String username);
 }

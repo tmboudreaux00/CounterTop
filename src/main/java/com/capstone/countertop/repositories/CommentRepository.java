@@ -10,7 +10,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 
     Comment getOne(long id);
-    Comment findByTerm(String term);
-    @Query("FROM comment c WHERE c.text LIKE %:term%")
+
+    @Query("FROM comment c WHERE c.text LIKE %:term%") //c.text references text field for comments - may need to be changed
     List<Comment> searchByDescriptionLike(@Param("term") String term);
 }
