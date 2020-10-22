@@ -1,9 +1,9 @@
 package com.capstone.countertop.repositories;
 
-import com.capstone.countertop.models.Recipe;
+import com.capstone.countertop.models.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-public interface TagRepository {
+public interface TagRepository extends JpaRepository<Tag, Long>{
+    Tag getOne(long id);
+    Tag findByName(String name);
 }
