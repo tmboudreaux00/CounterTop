@@ -27,7 +27,6 @@ public class Recipe {
     private String url;
 
     @ManyToOne
-    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 
