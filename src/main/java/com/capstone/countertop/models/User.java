@@ -46,6 +46,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> comments;
 
+
+
     public User(long id, String email,
                 @Size(min = 3, max = 24) String username,
                 @Size(min = 8, max = 50) String password,
