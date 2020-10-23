@@ -1,6 +1,7 @@
 package com.capstone.countertop.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ingredients")
@@ -14,6 +15,9 @@ public class Ingredient {
 
     @Column
     private long apiId;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "recipesIngredients")
+    private List<Recipe> recipes;
 
     public Ingredient (){}
 

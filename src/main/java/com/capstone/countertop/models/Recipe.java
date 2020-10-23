@@ -2,9 +2,11 @@ package com.capstone.countertop.models;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,6 +30,11 @@ public class Recipe {
     @Column(nullable = false)
     private String url;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    private Date datePublished;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -40,6 +47,17 @@ public class Recipe {
 
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "recipe")
     private List<Like> likes;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tagsRecipes")
+    private List<Tag> tags;
+
+    @ManyToMany
+    @JoinTable(
+            name="recipes_ingredients",
+            joinColumns={@JoinColumn(name="recipe_id")},
+            inverseJoinColumns={@JoinColumn(name="tag_id")}
+    )
+    private List<Ingredient> recipesIngredients;
 
     public Recipe() {}
 
