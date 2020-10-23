@@ -12,7 +12,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Recipe findByName(String Name);
     Recipe findFirstByName(String Name);
     Recipe findOne(String skill);
-    Recipe findAllByDate(Date date);
+    //Recipe findAllByDate(Date date);
 
 
     @Query("FROM recipe r WHERE r.title LIKE %:term%")
