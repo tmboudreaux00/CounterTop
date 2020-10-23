@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -29,13 +30,19 @@ public class Comment {
     @Column
     private Boolean liked;
 
+    //user_id foreign key
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    //recipe_id foreign key
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
+
+    //foreign comment_id key for likes table
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="comment")
+    private List<Like> likes;
 
     public Comment() {}
 
@@ -45,7 +52,8 @@ public class Comment {
                    @Size(min = 1, max = 500) String commentBody,
                    Boolean liked,
                    User user,
-                   Recipe recipe) {
+                   Recipe recipe,
+                   List<Like> likes) {
         this.id = id;
         this.parentComment = parentComment;
         this.date = date;
@@ -53,6 +61,15 @@ public class Comment {
         this.liked = liked;
         this.user = user;
         this.recipe = recipe;
+        this.likes = likes;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
     }
 
     public long getId() {

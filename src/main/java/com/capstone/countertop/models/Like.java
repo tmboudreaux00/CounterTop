@@ -13,21 +13,45 @@ public class Like {
     @Column
     private boolean liked;
 
+    //user_id foreign key
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    //recipe_id foreign key
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersLiked")
-    private List<User> users;
+    //comment_id foreign key
+    @ManyToOne
+    @JoinColumn(name="comment_id")
+    private Comment comment;
+
+    //users_liked_recipes join table
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersLikedRecipes")
+    private List<User> usersRecipesLiked;
+
+    //users_liked_comments join table
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersLikedComments")
+    private List<User> usersCommentsLiked;
 
     public Like (){}
 
-    public Like(long id) {
+    public Like(long id,
+                boolean liked,
+                User user,
+                Recipe recipe,
+                Comment comment,
+                List<User> usersRecipesLiked,
+                List<User> usersCommentsLiked) {
         this.id = id;
+        this.liked = liked;
+        this.user = user;
+        this.recipe = recipe;
+        this.comment = comment;
+        this.usersRecipesLiked = usersRecipesLiked;
+        this.usersCommentsLiked = usersCommentsLiked;
     }
 
     public long getId() {
@@ -62,11 +86,27 @@ public class Like {
         this.recipe = recipe;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public Comment getComment() {
+        return comment;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public List<User> getUsersRecipesLiked() {
+        return usersRecipesLiked;
+    }
+
+    public void setUsersRecipesLiked(List<User> usersRecipesLiked) {
+        this.usersRecipesLiked = usersRecipesLiked;
+    }
+
+    public List<User> getUsersCommentsLiked() {
+        return usersCommentsLiked;
+    }
+
+    public void setUsersCommentsLiked(List<User> usersCommentsLiked) {
+        this.usersCommentsLiked = usersCommentsLiked;
     }
 }

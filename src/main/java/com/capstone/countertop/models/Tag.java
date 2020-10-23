@@ -17,6 +17,7 @@ public class Tag {
     @Column(nullable = false)
     private String name;
 
+    //tags_recipes join table
     @ManyToMany
     @JoinTable(
             name="tags_recipes",
@@ -27,9 +28,26 @@ public class Tag {
 
     public Tag(){}
 
-    public Tag(long id, String name) {
+    public Tag(long id, String name, List<Recipe> tagsRecipes) {
         this.id = id;
         this.name = name;
+        this.tagsRecipes = tagsRecipes;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Recipe> getTagsRecipes() {
+        return tagsRecipes;
+    }
+
+    public void setTagsRecipes(List<Recipe> tagsRecipes) {
+        this.tagsRecipes = tagsRecipes;
     }
 
     public void setId(long id) {

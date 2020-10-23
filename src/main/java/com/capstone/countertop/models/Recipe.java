@@ -35,22 +35,28 @@ public class Recipe {
     @Column(nullable = false)
     private Date datePublished;
 
+    //user_id foreign key
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    //foreign recipe_id key for comments table
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private List<Comment> comments;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersFavorites")
-    private List<User> users;
-
+    //foreign recipe_id key for likes table
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "recipe")
     private List<Like> likes;
 
+    //tags_recipes join table
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tagsRecipes")
     private List<Tag> tags;
 
+    //users_favorites join table
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersFavorites")
+    private List<User> users;
+
+    //recipes_ingredients join table
     @ManyToMany
     @JoinTable(
             name="recipes_ingredients",
@@ -66,13 +72,73 @@ public class Recipe {
                   @Size(min = 4, max = 100) String name,
                   String skillLevel,
                   String url,
-                  User user) {
+                  Date datePublished,
+                  User user,
+                  List<Comment> comments,
+                  List<User> users,
+                  List<Like> likes,
+                  List<Tag> tags,
+                  List<Ingredient> recipesIngredients) {
         this.id = id;
         this.description = description;
         this.name = name;
         this.skillLevel = skillLevel;
         this.url = url;
+        this.datePublished = datePublished;
         this.user = user;
+        this.comments = comments;
+        this.users = users;
+        this.likes = likes;
+        this.tags = tags;
+        this.recipesIngredients = recipesIngredients;
+    }
+
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(Date datePublished) {
+        this.datePublished = datePublished;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Ingredient> getRecipesIngredients() {
+        return recipesIngredients;
+    }
+
+    public void setRecipesIngredients(List<Ingredient> recipesIngredients) {
+        this.recipesIngredients = recipesIngredients;
     }
 
     public long getId() {

@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false)
     private Date signupDate;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy") // This is for bind Date with @ModelAttribute
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dob;
@@ -40,15 +40,19 @@ public class User {
     @Column(nullable = false)
     private String url;
 
+    //foreign user_id key for recipes table
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Recipe> recipes;
 
+    //foreign user_id key for comments table
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> comments;
 
+    //foreign user_id key for likes table
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Like> likes;
 
+    //join table for users_favorites
     @ManyToMany
     @JoinTable(
             name="users_favorites",
@@ -57,22 +61,39 @@ public class User {
     )
     private List<Recipe> usersFavorites;
 
+    //join table for users_liked_recipes
     @ManyToMany
     @JoinTable(
-            name="users_liked",
+            name="users_liked_recipes",
             joinColumns={@JoinColumn(name="user_id")},
             inverseJoinColumns={@JoinColumn(name="like_id")}
     )
-    private List<Like> usersLiked;
+    private List<Like> usersLikedRecipes;
+
+    //join table for users_liked_comments
+    @ManyToMany
+    @JoinTable(
+            name="users_liked_comments",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="comment_id")}
+    )
+    private List<Like> usersLikedComments;
 
     public User() {}
 
-    public User(long id, String email,
+    public User(long id,
+                String email,
                 @Size(min = 3, max = 24) String username,
                 @Size(min = 8, max = 50) String password,
                 Date signupDate,
                 Date dob,
-                String url) {
+                String url,
+                List<Recipe> recipes,
+                List<Comment> comments,
+                List<Like> likes,
+                List<Recipe> usersFavorites,
+                List<Like> usersLikedRecipes,
+                List<Like> usersLikedComments) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -80,6 +101,60 @@ public class User {
         this.signupDate = signupDate;
         this.dob = dob;
         this.url = url;
+        this.recipes = recipes;
+        this.comments = comments;
+        this.likes = likes;
+        this.usersFavorites = usersFavorites;
+        this.usersLikedRecipes = usersLikedRecipes;
+        this.usersLikedComments = usersLikedComments;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Recipe> getUsersFavorites() {
+        return usersFavorites;
+    }
+
+    public void setUsersFavorites(List<Recipe> usersFavorites) {
+        this.usersFavorites = usersFavorites;
+    }
+
+    public List<Like> getUsersLikedRecipes() {
+        return usersLikedRecipes;
+    }
+
+    public void setUsersLikedRecipes(List<Like> usersLikedRecipes) {
+        this.usersLikedRecipes = usersLikedRecipes;
+    }
+
+    public List<Like> getUsersLikedComments() {
+        return usersLikedComments;
+    }
+
+    public void setUsersLikedComments(List<Like> usersLikedComments) {
+        this.usersLikedComments = usersLikedComments;
     }
 
     public long getId() {
