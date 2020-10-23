@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-
+    Recipe getOne(Long id);
     Recipe findByName(String Name);
     Recipe findFirstByName(String Name);
-    Recipe findOne(Long skill);
+    Recipe findOne(String skill);
+    Recipe findAllByDate(Date date);
 
-    Recipe getOne(Long id);
 
     @Query("FROM recipe r WHERE r.title LIKE %:term%")
     List<Recipe> searchByTitleLike(@Param("term") String term);
@@ -21,5 +21,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query("FROM recipe r WHERE r.description LIKE %:term%")
     List<Recipe> searchByDescriptionLike(@Param("term") String term);
 
-    List<Recipe> findAllByDate(Date date);
+
 }
