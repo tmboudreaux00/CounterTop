@@ -11,7 +11,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long>{
 
     Comment getOne(Long id);
 
-    List<Comment> findAllByDate(Date date);
+    //List<Comment> findAllByDate(Date date);
 
     @Query("FROM comments c WHERE c.comment_body LIKE %:term%")
     List<Comment> searchByDescriptionLike(@Param("term") String term);
