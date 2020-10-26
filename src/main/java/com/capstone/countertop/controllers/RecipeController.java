@@ -29,7 +29,7 @@ public class RecipeController {
 //        return "recipes/index";
 //    }
 
-    //{tim}}
+    //{tim}
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
         List<Recipe> recipes = recipeRepo.findAll();
