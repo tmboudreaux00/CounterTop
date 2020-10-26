@@ -21,10 +21,10 @@ ALTER TABLE comments AUTO_INCREMENT = 1;
 INSERT INTO users (dob, email, password, signup_date, url, username)
 VALUES
 (CURDATE(), 'admin@admin.com', 'admin', CURDATE(), 'www.countertop.com', 'admin'),
-(1991/01/01, 'austin@austin.com', 'austin', CURDATE(), 'www.countertop.com', 'austin'),
-(1992/02/02, 'charles@charles.com', 'charles', CURDATE(), 'www.countertop.com', 'charles'),
-(1993/03/03, 'david@david.com', 'david', CURDATE(), 'www.countertop.com', 'david'),
-(1994/04/04, 'tim@tim.com', 'tim', CURDATE(), 'www.countertop.com', 'tim');
+('1991/01/01', 'austin@austin.com', 'austin', CURDATE(), 'www.countertop.com', 'austin'),
+('1992/02/02', 'charles@charles.com', 'charles', CURDATE(), 'www.countertop.com', 'charles'),
+('1993/03/03', 'david@david.com', 'david', CURDATE(), 'www.countertop.com', 'david'),
+('1994/04/04', 'tim@tim.com', 'tim', CURDATE(), 'www.countertop.com', 'tim');
 
 
 #Seeds Recipes
