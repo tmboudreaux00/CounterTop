@@ -29,7 +29,7 @@ public class UserController {
         return "/profile";
     }
 
-    @GetMapping("users/register")
+    @GetMapping("/users/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
         return "/register";
