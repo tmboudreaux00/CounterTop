@@ -1,0 +1,12 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<standard_links th:fragment="comments">
+
+    <div id="userComments">
+        <form>
+            <label for="newComment">Feel free to leave feedback!</label><br />
+            <textarea id="newComment" name="newComment" form="newComment" maxlength="500" rows="5" cols="50" placeholder="This recipe is AMAZING!"></textarea><br />
+            <button type="submit" class="btn btn-primary">Submit</button><br />
+        </form>
+    </div>
+
+</standard_links>
