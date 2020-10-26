@@ -11,7 +11,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Recipe getOne(Long id);
     Recipe findByName(String name);
     Recipe findFirstByName(String name);
-    Recipe findOne(String skill);
+//    Recipe findOne(String skill);
     //Recipe findAllByDate(Date date);
 
 
