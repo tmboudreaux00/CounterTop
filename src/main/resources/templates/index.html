@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='Countertop')">
-<link th:replace="partials :: links"/>
-<style>
-    .card-img-top {
-        width: 100%;
-        height: 500px;
-        object-fit: cover;
-    }
-</style>
+<head th:replace="partials/head :: head (title='Countertop')">
 </head>
 <body>
-    <nav th:replace="partials :: navbar"></nav>
+    <nav th:replace="partials/navbar :: navbar"></nav>
     <h1 class="text-center">Countertop</h1>
     <h2 class="text-center mb-5">For all your recipe needs</h2>
 
