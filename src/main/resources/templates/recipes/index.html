@@ -12,7 +12,7 @@
         <div class="card mb-3" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title" th:text="${recipe.getName()}">TITLE</h5>
-                <p class="card-text">Description</p>
+                <p class="card-text" th:text="${recipe.getDescription()}">Description</p>
                 <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">View Recipe</a>
             </div>
         </div>
