@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='Register')"></head>
+<head th:replace="partials/head :: head (title='Register')">
+    <div th:replace="partials/links :: links"></div>
+</head>
 <body>
-    <nav th:replace="partials :: navbar"></nav>
+    <nav th:replace="partials/navbar :: navbar"></nav>
 
     <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
@@ -18,6 +20,6 @@
         <button type="submit" class="btn btn-primary mx-auto">Submit</button>
     </form>
 
-    <div th:replace="partials :: scripts"></div>
+    <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

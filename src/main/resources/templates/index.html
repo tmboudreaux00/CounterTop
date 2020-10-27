@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/head :: head (title='Countertop')">
+
+    <div th:replace="partials/links :: links"></div>
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+</style>
 </head>
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>
@@ -51,6 +60,6 @@
         <a href="/register">Join Now!</a>
     </div>
 
-    <div th:replace="partials :: scripts"></div>
+    <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>
