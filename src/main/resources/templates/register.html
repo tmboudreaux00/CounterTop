@@ -6,47 +6,51 @@
 
     <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
-    <form class="shadow w-50 p-3 mx-auto">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password">
-        </div>
-        <!--        <div class="form-group">-->
-        <!--            <label for="passwordCheck">Password</label>-->
-        <!--            <input type="password" class="form-control" id="passwordCheck">-->
-        <!--        </div>-->
-        <button type="submit" class="btn btn-primary mx-auto">Submit</button>
-    </form>
-
-<!--    <form th:action="@{/users/register}" method="POST" th:object="${user}">-->
+<!--    <form class="shadow w-50 p-3 mx-auto">-->
 <!--        <div class="form-group">-->
 <!--            <label for="email">Email address</label>-->
-<!--            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">-->
+<!--            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">-->
 <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
 <!--        </div>-->
 <!--        <div class="form-group">-->
 <!--            <label for="username">Username</label>-->
-<!--            <input type="email" class="form-control" id="username" th:field="*{username}">-->
+<!--            <input type="text" class="form-control" id="username">-->
 <!--        </div>-->
 <!--        <div class="form-group">-->
 <!--            <label for="password">Password</label>-->
-<!--            <input type="password" class="form-control" id="password" th:field="*{password}">-->
+<!--            <input type="password" class="form-control" id="password">-->
 <!--        </div>-->
-<!--&lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;            <label for="passwordCheck">Password</label>&ndash;&gt;-->
-<!--&lt;!&ndash;            <input type="password" class="form-control" id="passwordCheck">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--        &lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <label for="passwordCheck">Password</label>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <input type="password" class="form-control" id="passwordCheck">&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <button type="submit" class="btn btn-primary mx-auto">Submit</button>-->
 <!--    </form>-->
+
+    <form th:action="@{/register}" method="POST" th:object="${user}">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+        </div>
+        <div class="form-group">
+            <label for="date">Date of Birth</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="passwordCheck">Password</label>-->
+<!--            <input type="password" class="form-control" id="passwordCheck">-->
+<!--        </div>-->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
     <div th:replace="partials :: scripts"></div>
 </body>
