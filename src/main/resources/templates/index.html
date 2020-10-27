@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='Countertop')"></head>
+<head th:replace="partials :: head (title='Countertop')">
+<link th:replace="partials :: links"/>
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+</style>
+</head>
 <body>
     <nav th:replace="partials :: navbar"></nav>
     <h1 class="text-center">Countertop</h1>
@@ -14,27 +23,27 @@
     </form>
 
     <h3 class="text-center mt-5">Checkout this weeks most popular recipes!</h3>
-    <main class="container">
+    <div class="container">
 
         <div class="mx-auto w-75 d-flex justify-content-around">
-            <div class="card" style="width: 18rem;">
-                <img th:src="${recipe.url}" class="card-img-top" alt="...">
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe.url}" class="card-img-top" alt="Card img cap">
                 <div class="card-body" >
                     <h5 class="card-title" th:text="${recipe.name}"></h5>
                     <p class="card-text" th:text="${recipe.description}"></p>
                     <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img th:src="${recipe2.url}" class="card-img-top" alt="...">
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe2.url}" class="card-img-top" alt="Card img cap">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe2.name}"></h5>
                     <p class="card-text" th:text="${recipe2.description}"></p>
                     <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img th:src="${recipe3.url}" class="card-img-top" alt="...">
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe3.url}" class="card-img-top" alt="Card img cap">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe3.name}"></h5>
                     <p class="card-text" th:text="${recipe3.description}"></p>
@@ -43,7 +52,7 @@
             </div>
         </div>
 
-    </main>
+    </div>
 
     <div class="text-center mt-5">
         <h4>Like what you see?</h4>
