@@ -6,10 +6,11 @@ import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
 public class RecipeController {
@@ -53,8 +54,12 @@ public class RecipeController {
     public String createRecipe(@ModelAttribute Recipe recipe) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
+        LocalDate now = LocalDate.now();
+        java.util.Date date = java.sql.Date.valueOf(now);
+        recipe.setDatePublished(date);
+        recipe.setUrl("URL"); // CHANGE
         recipeRepository.save(recipe);
-        emailService.prepareAndSend(recipe, "New Recipe Submitted!", "Congratulations on submitting your new recipe!");
+//        emailService.prepareAndSend(recipe, "New Recipe Submitted!", "Congratulations on submitting your new recipe!");
         return "redirect:/recipes/";
     }
 

@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Controller
 public class AuthenticationController {
@@ -31,9 +35,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@ModelAttribute User user, @RequestParam(name="date") String birth) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        LocalDate date = LocalDate.now();
+        java.util.Date birthdate = java.sql.Date.valueOf(LocalDate.parse(birth));
+        java.util.Date date1 = java.sql.Date.valueOf(date);
+        user.setDob(birthdate);
+        user.setSignupDate(date1);
         userRepository.save(user);
         return "redirect:/login";
     }
