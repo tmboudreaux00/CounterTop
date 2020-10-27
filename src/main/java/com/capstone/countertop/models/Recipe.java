@@ -24,10 +24,12 @@ public class Recipe {
     @Size(min = 4, max = 100)
     private String name;
 
-    @Column(nullable = false)
+    // INSTRUCTIONS STRING
+
+    @Column(nullable = false) // Change
     private String skillLevel;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // Change
     private String url;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")

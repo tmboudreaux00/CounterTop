@@ -1,17 +1,61 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <standard_links th:fragment="navbar">
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Countertop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light topnav">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hello/there">Hello</a>
+                </li>
+                <!-- If the user is not logged in, display the login form and register button -->
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/sign-up">Sign Up</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User Page
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Recipes">Recipes List</a>
+                        <a class="dropdown-item" href="/Recipes/Create">Recipes Create</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Favorites">Favorites</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Recipes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/!">!</a>
+                        <a class="dropdown-item" href="/!/!">!</a>
+                    </div>
+                </li>
+
+                <!-- If the user is already logged in / authenticated, display the logout button (form) -->
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                    </form>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
     </nav>
-
 </standard_links>
