@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='Recipe')"></head>
+<head th:replace="partials/head :: head (title='Recipe')">
+    <div th:replace="partials/links :: links"></div>
+</head>
 <body>
-    <nav th:replace="partials :: navbar"></nav>
+    <nav th:replace="partials/navbar :: navbar"></nav>
 
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <h1>RECIPE TITLE</h1>
+                <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
             </div>
             <div class="col-4">
-                <h4>- Created by USERNAME</h4>
+                <h4>- Created by <span th:text="${recipe.getUser().getUsername()}">USERNAME</span></h4>
             </div>
         </div>
         <div class="row">
             <img src="..." class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 100%">
         </div>
         <div class="row mt-2">
-            <div class="col-8">
+            <div class="col-8" th:text="${recipe.getDescription()}">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
             </div>
             <div class="col-4">
@@ -32,6 +34,6 @@
         </div>
     </div>
 
-    <div th:replace="partials :: scripts"></div>
+    <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

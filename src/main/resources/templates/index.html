@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='Countertop')">
-<link th:replace="partials :: links"/>
+<head th:replace="partials/head :: head (title='Countertop')">
+    <div th:replace="partials/links :: links"></div>
 <style>
     .card-img-top {
         width: 100%;
@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-    <nav th:replace="partials :: navbar"></nav>
+    <nav th:replace="partials/navbar :: navbar"></nav>
     <h1 class="text-center">Countertop</h1>
     <h2 class="text-center mb-5">For all your recipe needs</h2>
 
@@ -59,6 +59,6 @@
         <a href="/register">Join Now!</a>
     </div>
 
-    <div th:replace="partials :: scripts"></div>
+    <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

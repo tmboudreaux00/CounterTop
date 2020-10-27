@@ -38,6 +38,8 @@ public class AuthenticationController {
     public String registerUser(@ModelAttribute User user, @RequestParam(name="date") String birth) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        user.setUsername(user.getUsername().toLowerCase());
+        user.setEmail(user.getEmail().toLowerCase());
         LocalDate date = LocalDate.now();
         java.util.Date birthdate = java.sql.Date.valueOf(LocalDate.parse(birth));
         java.util.Date date1 = java.sql.Date.valueOf(date);

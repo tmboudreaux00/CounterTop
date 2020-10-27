@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head (title='All Recipes')"></head>
+<head th:replace="partials/head :: head (title='All Recipes')">
+    <div th:replace="partials/links :: links"></div>
+</head>
 <body>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+
     <h1>RECIPES INDEX</h1>
 
     <div th:each="recipe : ${recipes}">
@@ -13,5 +17,7 @@
             </div>
         </div>
     </div>
+
+    <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>
