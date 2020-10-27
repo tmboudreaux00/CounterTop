@@ -26,8 +26,16 @@ public class IndexController {
 
     @GetMapping(path="/")
     public String home(Model model) {
+
         Recipe recipe = recipeRepo.getOne((long) 11);
         model.addAttribute("recipe", recipe);
+
+        Recipe recipe2 = recipeRepo.getOne((long) 12);
+        model.addAttribute("recipe2", recipe2);
+
+        Recipe recipe3 = recipeRepo.getOne((long) 13);
+        model.addAttribute("recipe3", recipe3);
+
         return "/index";
     }
 

@@ -41,7 +41,8 @@ VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'beginner', 'www.counte
        (CURDATE(), 'Recipe #9 Description', 'Recipe #9', 'difficult', 'www.countertop.com', '3'),
        (CURDATE(), 'Recipe #10 Description', 'Recipe #10', 'chef', 'www.countertop.com', '2'),
        (CURDATE(), 'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
-        'Cacio e Pepe', 'beginner', 'https://bit.ly/31KeydW', 3);
+        'Cacio e Pepe', 'beginner', 'https://bit.ly/31KeydW', 3),
+       (CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 );
 
 #Seeds Tags
 INSERT INTO tags (name)
@@ -72,17 +73,15 @@ VALUES
 INSERT INTO comments (comment_body, date, liked, recipe_id, user_id)
 VALUES
 ('This is delicious', CURDATE(), true, 1, 1),
-('This is delicious', CURDATE(), true, 1, 1),
 ('This is delicious', CURDATE(), false, 2, 3),
 ('This is delicious', CURDATE(), false, 3, 4),
-('This is delicious', CURDATE(), true, 4, 5);
+('This is delicious', CURDATE(), true, 4, 5),
+('This is delicious', CURDATE(), false, 1, 1),
+('This is delicious', CURDATE(), true, 1, 1),
+('This is delicious', CURDATE(), true, 1, 1);
 
-INSERT INTO comments (comment_body, date, liked,parent_comment_id, recipe_id, user_id)
+INSERT INTO comments (comment_body, date, liked, parent_comment_id, recipe_id, user_id)
 VALUES
-('This is delicious', CURDATE(), true, 0, 1, 1),
-('This is delicious', CURDATE(), false, 0, 2, 3),
-('This is delicious', CURDATE(), false, 0, 3, 4),
-('This is delicious', CURDATE(), true, 0, 4, 5),
 ('This is delicious', CURDATE(), false, 1, 5, 1),
 ('This is delicious', CURDATE(), false, 2, 1, 1),
 ('This is delicious', CURDATE(), false, 6, 1, 1),
@@ -92,7 +91,15 @@ VALUES
 ('This is delicious', CURDATE(), true, 8, 1, 1),
 ('This is delicious', CURDATE(), true, 2, 1, 1),
 ('This is delicious', CURDATE(), false, 1, 1, 1),
-('This is delicious', CURDATE(), true, 3, 1, 1),
-('This is delicious', CURDATE(), false, 0, 1, 1),
-('This is delicious', CURDATE(), true, 0, 1, 1),
-('This is delicious', CURDATE(), true, 0, 1, 1);
+('This is delicious', CURDATE(), true, 3, 1, 1);
+
+
+ALTER TABLE recipes AUTO_INCREMENT = 11;
+
+INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
+VALUES
+(CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 );
+
+INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
+VALUES
+(CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'easy', 'https://bit.ly/35I9Jmo', 3 );
