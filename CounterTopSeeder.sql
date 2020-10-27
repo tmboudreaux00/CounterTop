@@ -67,12 +67,18 @@ VALUES
 ('french');
 
 #Seeds Comments
+INSERT INTO comments (comment_body, date, liked, recipe_id, user_id)
+VALUES
+('This is delicious', CURDATE(), true, 1, 1),
+('This is delicious', CURDATE(), false, 2, 3),
+('This is delicious', CURDATE(), false, 3, 4),
+('This is delicious', CURDATE(), true, 4, 5),
+('This is delicious', CURDATE(), false, 1, 1),
+('This is delicious', CURDATE(), true, 1, 1),
+('This is delicious', CURDATE(), true, 1, 1);
+
 INSERT INTO comments (comment_body, date, liked, parent_comment_id, recipe_id, user_id)
 VALUES
-('This is delicious', CURDATE(), true, 0, 1, 1),
-('This is delicious', CURDATE(), false, 0, 2, 3),
-('This is delicious', CURDATE(), false, 0, 3, 4),
-('This is delicious', CURDATE(), true, 0, 4, 5),
 ('This is delicious', CURDATE(), false, 1, 5, 1),
 ('This is delicious', CURDATE(), false, 2, 1, 1),
 ('This is delicious', CURDATE(), false, 6, 1, 1),
@@ -82,7 +88,4 @@ VALUES
 ('This is delicious', CURDATE(), true, 8, 1, 1),
 ('This is delicious', CURDATE(), true, 2, 1, 1),
 ('This is delicious', CURDATE(), false, 1, 1, 1),
-('This is delicious', CURDATE(), true, 3, 1, 1),
-('This is delicious', CURDATE(), false, 0, 1, 1),
-('This is delicious', CURDATE(), true, 0, 1, 1),
-('This is delicious', CURDATE(), true, 0, 1, 1);
+('This is delicious', CURDATE(), true, 3, 1, 1);
