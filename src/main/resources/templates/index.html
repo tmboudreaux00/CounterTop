@@ -7,6 +7,7 @@
 </head>
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>
+    <br>
     <h1 class="text-center">Countertop</h1>
     <h2 class="text-center mb-5">For all your recipe needs</h2>
 
@@ -22,7 +23,7 @@
 
         <div class="mx-auto w-75 d-flex justify-content-around">
             <div class="card my-3" style="width: 18rem;">
-                <img th:src="${recipe.url}" class="card-img-top" alt="Card img cap">
+                <img th:src="${recipe.url}" class="card-img-top" alt="Card img cap" >
                 <div class="card-body" >
                     <h5 class="card-title" th:text="${recipe.name}"></h5>
                     <p class="card-text" th:text="${recipe.description}"></p>
