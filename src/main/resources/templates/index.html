@@ -11,9 +11,9 @@
     <h2 class="text-center mb-5">For all your recipe needs</h2>
 
     <h3 class="text-center">Search for a recipe!</h3>
-    <form class="w-50 mx-auto">
+    <form class="w-50 mx-auto" action="/recipes/search" method="get">
         <div class="form-group">
-            <input type="text" class="form-control" id="main_search" placeholder="recipe here :)">
+            <input type="text" class="form-control" id="main_search" placeholder="recipe here :)" name="searchTerm">
         </div>
     </form>
 

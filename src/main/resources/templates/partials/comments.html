@@ -1,10 +1,11 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <standard_links th:fragment="comments">
 
-    <div id="userComments">
-        <form>
-            <label for="newComment">Feel free to leave feedback!</label><br />
-            <textarea id="newComment" name="newComment" form="newComment" maxlength="500" rows="5" cols="50" placeholder="This recipe is AMAZING!"></textarea><br />
+    <div id="userComments" sec:authorize="isAuthenticated()">
+        <form th:action="@{/comment}" method="post" th:object="${comment}" id="newComment">
+            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+            <label for="commentBody">Feel free to leave feedback!</label><br />
+            <textarea th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="500" rows="5" cols="50" placeholder="This recipe is AMAZING!"></textarea><br />
             <button type="submit" class="btn btn-primary">Submit</button><br />
         </form>
     </div>

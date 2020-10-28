@@ -1,7 +1,9 @@
 package com.capstone.countertop.controllers;
 
+import com.capstone.countertop.models.Comment;
 import com.capstone.countertop.models.Recipe;
 import com.capstone.countertop.models.User;
+import com.capstone.countertop.repositories.CommentRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.EmailService;
@@ -17,11 +19,13 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
     private final EmailService emailService;
+    private final CommentRepository commentRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping("/recipes")
@@ -33,6 +37,8 @@ public class RecipeController {
     @GetMapping("/recipes/{id}")
     public String showRecipe(@PathVariable long id, Model model) {
         model.addAttribute("recipe", recipeRepository.getOne(id));
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
         return "recipes/recipe";
     }
 
