@@ -91,9 +91,8 @@ body {
     line-height: 1.5;
     color: #55595c;
     text-align: left;
-    background-color: #fff;
+    /*background-color: #fff;*/
     background-image: url("templates/images/augustine-wong-li0iC0rjvvg-unsplash (1).jpg");
-
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4661,6 +4660,7 @@ input[type="button"].btn-block {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    margin: 0px 7px 0px;
 }
 
 .card > hr {
