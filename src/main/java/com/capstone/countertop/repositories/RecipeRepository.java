@@ -14,6 +14,8 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 //    Recipe findOne(String skill);
     //Recipe findAllByDate(Date date);
 
+    @Query("FROM Recipe r WHERE r.name LIKE %:term% OR r.description LIKE %:term%")
+    List<Recipe> searchRecipesByTerm(@Param("term") String term);
 
     @Query("FROM Recipe r WHERE r.name LIKE %:term%")
     List<Recipe> searchByNameLike(@Param("term") String term);

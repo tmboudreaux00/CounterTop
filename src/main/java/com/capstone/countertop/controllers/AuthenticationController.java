@@ -1,7 +1,11 @@
 package com.capstone.countertop.controllers;
 
+import com.capstone.countertop.models.Comment;
 import com.capstone.countertop.models.User;
+import com.capstone.countertop.repositories.CommentRepository;
+import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,17 +14,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Controller
 public class AuthenticationController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RecipeRepository recipeRepository;
+    private final CommentRepository commentRepository;
 
-    public AuthenticationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthenticationController(UserRepository userRepository, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.recipeRepository = recipeRepository;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping("/login")
@@ -47,5 +54,17 @@ public class AuthenticationController {
         user.setSignupDate(date1);
         userRepository.save(user);
         return "redirect:/login";
+    }
+
+    @PostMapping("/comment")
+    public String comment(@ModelAttribute Comment comment, @RequestParam(name="recipeID") long id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        java.util.Date date = new java.util.Date();
+        comment.setUser(userRepository.getOne(user.getId()));
+        comment.setRecipe(recipeRepository.getOne(id));
+        comment.setDate(date);
+
+        commentRepository.save(comment);
+        return "redirect:/recipes/" + id;
     }
 }
