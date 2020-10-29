@@ -109,3 +109,11 @@ VALUES ('pecorino romano'),
        ('pasta'),
        ('black pepper'),
        ('salt');
+
+INSERT INTO likes (liked, recipe_id, user_id)
+VALUES (true, 11, 1),
+       (true, 11, 2),
+       (true, 11, 3),
+       (true, 11, 4),
+       (true, 11, 5),
+       (true, 11, 6);
