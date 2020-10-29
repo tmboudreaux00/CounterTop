@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='Register')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<body>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+
+    <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
+
+    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}">
+        <div class="form-group">
+            <label for="name">Recipe Title</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="description">Recipe Description</label>
+            <input type="text" th:field="*{description}" id="description">
+        </div>
+        <div class="form-group">
+            <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
+            <textarea id="instructions"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="skill">Difficulty</label>
+            <select class="form-control" id="skill" th:field="*{skillLevel}">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mx-auto">Submit</button>
+    </form>
+
+    <div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='All Recipes')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<body>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+
+    <h1>RECIPES INDEX</h1>
+
+    <div th:each="recipe : ${recipes}">
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${recipe.getName()}">TITLE</h5>
+                <p class="card-text" th:text="${recipe.getDescription()}">Description</p>
+                <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">View Recipe</a>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

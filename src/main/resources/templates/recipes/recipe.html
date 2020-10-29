@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='Recipe')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<body>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
+            </div>
+            <div class="col-4">
+                <h4>- Created by <span th:text="${recipe.getUser().getUsername()}">USERNAME</span></h4>
+            </div>
+        </div>
+        <div class="row">
+            <img src="..." class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 100%">
+        </div>
+        <div class="row mt-2">
+            <div class="col-8" th:text="${recipe.getDescription()}">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
+            </div>
+            <div class="col-4">
+                <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h4>Comments</h4>
+<!--    <div class="form-group" th:se>-->
+<!--        <label for="exampleFormControlTextarea1">Leave a comment!</label>-->
+<!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--    </div>-->
+    <div th:replace="partials/comments :: comments"></div>
+
+    <div th:each="item : ${comments}">
+        <p th:text="${item.getCommentBody()}">COMMENT HERE</p>
+        <p>- <span th:text="${item.getUser().getUsername()}"></span></p>
+    </div>
+
+    <div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

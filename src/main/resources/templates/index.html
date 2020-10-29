@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='Countertop')">
+
+    <div th:replace="partials/links :: links"></div>
+
+</head>
+<body>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+    <br>
+    <h1 class="text-center">Countertop</h1>
+    <h2 class="text-center mb-5">For all your recipe needs</h2>
+
+    <h3 class="text-center">Search for a recipe!</h3>
+    <form class="w-50 mx-auto" action="/recipes/search" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" id="main_search" placeholder="recipe here :)" name="searchTerm">
+        </div>
+    </form>
+
+    <h3 class="text-center mt-5">Checkout this weeks most popular recipes!</h3>
+    <div class="container">
+
+        <div class="mx-auto w-75 d-flex justify-content-around">
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe.url}" class="card-img-top" alt="Card img cap" >
+                <div class="card-body" >
+                    <h5 class="card-title" th:text="${recipe.name}"></h5>
+                    <p class="card-text" th:text="${recipe.description}"></p>
+                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                </div>
+            </div>
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe2.url}" class="card-img-top" alt="Card img cap">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${recipe2.name}"></h5>
+                    <p class="card-text" th:text="${recipe2.description}"></p>
+                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                </div>
+            </div>
+            <div class="card my-3" style="width: 18rem;">
+                <img th:src="${recipe3.url}" class="card-img-top" alt="Card img cap">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${recipe3.name}"></h5>
+                    <p class="card-text" th:text="${recipe3.description}"></p>
+                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+        <h4>Like what you see?</h4>
+        <a href="/register">Join Now!</a>
+    </div>
+
+    <div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

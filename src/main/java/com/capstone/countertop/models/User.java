@@ -37,7 +37,6 @@ public class User {
     @Column(nullable = false)
     private Date dob;
 
-    @Column(nullable = false)
     private String url;
 
     //foreign user_id key for recipes table
@@ -80,6 +79,22 @@ public class User {
     private List<Like> usersLikedComments;
 
     public User() {}
+
+    public User(User copy) {
+        this.id = copy.id;
+        this.email = copy.email;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.signupDate = copy.signupDate;
+        this.dob = copy.dob;
+        this.url = copy.url;
+        this.recipes = copy.recipes;
+        this.comments = copy.comments;
+        this.likes = copy.likes;
+        this.usersFavorites = copy.usersFavorites;
+        this.usersLikedRecipes = copy.usersLikedRecipes;
+        this.usersLikedComments = copy.usersLikedComments;
+    }
 
     public User(long id,
                 String email,
