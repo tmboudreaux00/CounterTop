@@ -25,7 +25,7 @@
 
     const getApiResults = async () => {
 
-        const key = "5af6024d199b481f99458dc8fc697543"
+        const key = "";
         const query = await getQueryString();
 
         if (query !== null) {
