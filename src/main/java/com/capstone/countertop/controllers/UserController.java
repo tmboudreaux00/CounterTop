@@ -23,7 +23,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("users/profile")
     public String profilePage(@PathVariable long id, Model model){
         model.addAttribute("user", userDao.getOne(id));
         return "/profile";

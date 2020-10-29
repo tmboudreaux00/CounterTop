@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head :: head (title='${user} Profile')"></head>
+<head th:replace="partials/head :: head (title='${user} Profile')"></head>
 <body>
-<nav th:replace="/partials/navbar :: navbar"></nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container-fluid" th:object="${session.user}">
     <!-- PROFILE INFORMATION -->
