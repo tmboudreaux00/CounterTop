@@ -28,8 +28,7 @@
                         <a class="nav-link" href="/recipes">Recipes</a>
                     </li>
                     <!-- IF THE USER IS NOT LOGGED IN, DISPLAY THE LOGIN FORM AND REGISTER BUTTON -->
-                    <!-- <li sec:authorize="isAnonymous()" class="nav-item"> -->
-                    <li class="nav-item"><!-- REMOVE -->
+                    <li sec:authorize="isAnonymous()" class="nav-item">
                         <a class="nav-link" href="/register">Sign Up</a>
                     </li>
                 </ul>
@@ -37,39 +36,36 @@
 
 
 
-            <!-- <div sec:authorize="isAnonymous()" class="col d-flex"> -->
-            <div class="col d-flex">
+             <div sec:authorize="isAnonymous()" class="col d-flex">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><!-- REMOVE -->
+                    <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="col d-flex">
-            <!-- <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto"> -->
-            <ul class="navbar-nav ml-auto"><!-- REMOVE -->
-                <li class="nav-item"><a class="nav-link" href="/Recipes/Create">Create A Recipe</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Favorites</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="..." alt="profile photo" />
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/users/recipes">My Recipes</a>
-<!--                        <a class="dropdown-item" href="#">Groceries</a>--> <!-- REMOVE -->
-                        <a class="dropdown-item" href="#">All About Me</a>
-                        <div class="dropdown-divider"></div>
-                    <!--    <form th:action="@{/logout}" th:method="post"> -->
-                            <form><!-- REMOVE -->
-                                <a class="dropdown-item">Log Out</a>
-                             </form>
+            <div sec:authorize="isAuthenticated()" class="col d-flex">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/Recipes/Create">Create A Recipe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Favorites</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="..." alt="profile photo" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/users/recipes">My Recipes</a>
+    <!--                        <a class="dropdown-item" href="#">Groceries</a>--> <!-- REMOVE -->
+                            <a class="dropdown-item" href="#">All About Me</a>
+                            <div class="dropdown-divider"></div>
+                            <a th:action="@{/logout}" th:method="post" class="dropdown-item" href="#">Log Out</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+
 
 <div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
