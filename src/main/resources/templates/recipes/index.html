@@ -8,6 +8,12 @@
 
     <h1>RECIPES INDEX</h1>
 
+    <h2>Spoonacular</h2>
+    <div id="api-results">
+
+    </div>
+
+    <hr>
     <div th:each="recipe : ${recipes}">
         <div class="card mb-3" style="width: 18rem;">
             <div class="card-body">
@@ -18,6 +24,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
     <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

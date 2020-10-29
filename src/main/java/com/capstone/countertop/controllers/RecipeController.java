@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -36,9 +38,12 @@ public class RecipeController {
 
     @GetMapping("/recipes/{id}")
     public String showRecipe(@PathVariable long id, Model model) {
+//        User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("recipe", recipeRepository.getOne(id));
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
+//        if(current != null)
+//            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
         return "recipes/recipe";
     }
 
@@ -92,6 +97,26 @@ public class RecipeController {
         recipe.setDescription(description);
         recipeRepository.save(recipe);
         return "redirect:/recipes/";
+    }
+
+    @PostMapping("/recipes/favorite")
+    public String favoriteRecipe(@RequestParam(name="recipeID") long id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = userRepository.getOne(user.getId());
+        Recipe recipe = recipeRepository.getOne(id);
+
+        if(user.getUsersFavorites().contains(recipe)) {
+            System.out.println("Old Recipe");
+            user.getUsersFavorites().remove(recipe);
+        }
+        else {
+            System.out.println("New Recipe");
+            user.getUsersFavorites().add(recipe);
+            System.out.println(user.getUsersFavorites().toString());
+        }
+        userRepository.save(user);
+
+        return "redirect:/recipes/" + id;
     }
 
 }

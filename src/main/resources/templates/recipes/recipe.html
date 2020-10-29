@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head (title='Recipe')">
     <div th:replace="partials/links :: links"></div>
 </head>
@@ -32,6 +32,18 @@
                 </ul>
             </div>
         </div>
+    </div>
+
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/recipes/favorite}" method="post">
+            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+<!--            <button type="submit" value="submit">-->
+<!--                <i class="far fa-star" th:if="${favorited}"></i>-->
+<!--                <i class="fas fa-star" th:if="${not favorited}"></i>-->
+<!--            </button>.-->
+            <input type="submit" value="favorite">
+        </form>
     </div>
 
     <h4>Comments</h4>

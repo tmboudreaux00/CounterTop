@@ -1,6 +1,7 @@
 package com.capstone.countertop.controllers;
 
 import com.capstone.countertop.models.Comment;
+import com.capstone.countertop.models.Recipe;
 import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.CommentRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AuthenticationController {
