@@ -5,17 +5,19 @@
 <nav th:replace="/partials/navbar :: navbar"></nav>
 
 <div class="container-fluid" th:object="${session.user}">
+
     <!-- PROFILE INFORMATION -->
     <div class="col d-flex">
-        <div class="col" id="profileImg">
+        <div class="col-2 border border-dark" id="profileImg" style="height: 150px; width: 150px;">
             <img src="..." alt="Profile Photo" />
         </div>
         <div class="col d-flex">
-            <div class="col d-flex">
+            <div class="col">
                 <div id="profileUsername">Username <span th:text="*{username}">Username</span></div>
                 <div id="profileEmail">Email <span th:text="*{email}"></span></div>
+
             </div>
-            <div class="col d-flex">
+            <div class="col">
                 <div id="profileSignUp">Sign Up Date <span th:text="*{signupDate}"></span></div>
                 <div id="profileDOB"><span th:text="*{dob}">DOB</span></div>
             </div>
@@ -23,14 +25,14 @@
     </div>
 
     <!-- RECIPE INFORMATION -->
-    <div class="col d-flex">Recipes
+    <div class="col d-flex border border-dark">Recipes
         <!-- Row 1 -->
         <div class="col d-flex">
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -40,8 +42,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -51,8 +53,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -67,8 +69,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -78,8 +80,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -89,8 +91,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -105,8 +107,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -116,8 +118,8 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
@@ -127,25 +129,17 @@
 
             <div class="col d-flex">
                 <div class="col d-flex">
-                    <div><img src="..." alt="Foto de comida deliciosa" />Recipe Photo</div>
-                    <div th:text="${recipe.name}"></div>
+                    <div><img src="..." alt="Foto de comida deliciosa" /></div>
+                    <div th:text="${recipe.name}">Recipe Name</div>
                 </div>
                 <div class="col">
                     <button>edit</button>
                     <button>delete</button>
                 </div>
             </div>
-
         </div>
-
     </div>
-
-
-
 </div>
-
-
-
 
 <div th:replace="/partials/footer :: footer"></div>
 <div th:replace="/partials/scripts :: scripts"></div>
