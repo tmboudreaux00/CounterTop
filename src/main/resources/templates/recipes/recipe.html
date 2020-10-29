@@ -15,8 +15,8 @@
                 <h4>- Created by <span th:text="${recipe.getUser().getUsername()}">USERNAME</span></h4>
             </div>
         </div>
-        <div class="row">
-            <img src="..." class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 100%">
+        <div class="row">g
+            <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="height: 500px; width: 500px; border: 1px solid black;">
         </div>
         <div class="row mt-2">
             <div class="col-8" th:text="${recipe.getDescription()}">
@@ -32,19 +32,21 @@
                 </ul>
             </div>
         </div>
+        <h4>Comments</h4>
+        <!--    <div class="form-group" th:se>-->
+        <!--        <label for="exampleFormControlTextarea1">Leave a comment!</label>-->
+        <!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+        <!--    </div>-->
+        <div th:replace="partials/comments :: comments"></div>
+
+        <div th:each="item : ${comments}">
+            <p th:text="${item.getCommentBody()}">COMMENT HERE</p>
+            <p>- <span th:text="${item.getUser().getUsername()}"></span></p>
+        </div>
+
     </div>
 
-    <h4>Comments</h4>
-<!--    <div class="form-group" th:se>-->
-<!--        <label for="exampleFormControlTextarea1">Leave a comment!</label>-->
-<!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-<!--    </div>-->
-    <div th:replace="partials/comments :: comments"></div>
 
-    <div th:each="item : ${comments}">
-        <p th:text="${item.getCommentBody()}">COMMENT HERE</p>
-        <p>- <span th:text="${item.getUser().getUsername()}"></span></p>
-    </div>
 
     <div th:replace="partials/scripts :: scripts"></div>
 </body>

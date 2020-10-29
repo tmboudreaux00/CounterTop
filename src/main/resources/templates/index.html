@@ -26,7 +26,7 @@
                 <div class="card-body" >
                     <h5 class="card-title" th:text="${recipe.name}"></h5>
                     <p class="card-text" th:text="${recipe.description}"></p>
-                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">Checkout this recipe!</a>
                 </div>
             </div>
             <div class="card my-3" style="width: 18rem;">
@@ -34,7 +34,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe2.name}"></h5>
                     <p class="card-text" th:text="${recipe2.description}"></p>
-                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">Checkout this recipe!</a>
                 </div>
             </div>
             <div class="card my-3" style="width: 18rem;">
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe3.name}"></h5>
                     <p class="card-text" th:text="${recipe3.description}"></p>
-                    <a href="/recipes/1" class="btn btn-primary">Checkout this recipe!</a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">Checkout this recipe!</a>
                 </div>
             </div>
         </div>

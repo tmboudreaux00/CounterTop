@@ -49,7 +49,7 @@
                 <!-- If the user is already logged in / authenticated, display the logout button (form) -->
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <form th:action="@{/logout}" th:method="post" >
-                        <button class="btn-link btn">Logout</button>
+                        <button class="nav-link btn-link btn ">Logout</button>
                     </form>
                 </li>
             </ul>
