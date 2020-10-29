@@ -8,7 +8,7 @@
 
     <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
-    <form th:action="@{/register}" method="POST" th:object="${user}" class="shadow w-50 p-3 mx-auto">
+    <form th:action="@{/register}" method="POST" th:object="${user}" class="shadow w-50 p-3 mx-auto" style="background-color: white">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
