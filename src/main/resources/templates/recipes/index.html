@@ -6,20 +6,30 @@
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>
 
-    <h1>RECIPES INDEX</h1>
+    <br>
+    <h1 class="text-center">RECIPES INDEX</h1>
+    <br>
+    <h3 class="text-center">Search for a recipe!</h3>
+    <form class="w-50 mx-auto" action="/recipes/search" method="get" >
+        <div class="form-group" >
+            <input style="background-color: white;" type="text" class="form-control" id="main_search" placeholder="recipe here :)" name="searchTerm">
+        </div>
+    </form>
 
-    <h2>Spoonacular</h2>
-    <div id="api-results">
+    <div id="api-results" class="container">
 
     </div>
 
-    <hr>
-    <div th:each="recipe : ${recipes}">
-        <div class="card mb-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${recipe.getName()}">TITLE</h5>
-                <p class="card-text" th:text="${recipe.getDescription()}">Description</p>
-                <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">View Recipe</a>
+    <div class="container">
+        <div class="mx-auto w-75 d-flex justify-content-around row row-cols-3">
+            <div class="col-4" th:each="recipe : ${recipes}">
+                <div class="card my-3" >
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${recipe.getName()}">TITLE</h5>
+                        <p class="card-text" th:text="${recipe.getDescription()}">Description</p>
+                        <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">View Recipe</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

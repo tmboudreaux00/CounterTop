@@ -1,10 +1,14 @@
 (() => {
     const render = (recipe) => {
         const html =
-            `<div class="card mb-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">${recipe.title}</h5>
-                    <a href="#" class="btn btn-primary">View Recipe</a>
+            `<div class="mx-auto w-75 d-flex justify-content-around row row-cols-3">
+                <div class="col-4">
+                    <div class="card my-3" >
+                        <div class="card-body">
+                            <h5 class="card-title">${recipe.title}</h5>
+                            <a th:href="#" class="btn btn-primary">View Recipe</a>
+                        </div>
+                    </div>
                 </div>
             </div>`
 
@@ -20,13 +24,14 @@
     }
 
     const getApiResults = async () => {
-        const key = "5af6024d199b481f99458dc8fc697543";
+
+        const key = "5af6024d199b481f99458dc8fc697543"
         const query = await getQueryString();
 
         if (query !== null) {
             let result;
             try {
-                result = await fetch(`https://api.spoonacular.com/food/products/search?query=${query}&apiKey=${key}`)
+                result = await fetch(`https://api.spoonacular.com/food/products/search?query=${query}&apiKey=${key}`);
                 const data = await result.json();
                 console.log(data);
                 data.products.forEach(e => render(e));

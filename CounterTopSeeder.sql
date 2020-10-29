@@ -103,3 +103,9 @@ VALUES
 INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
 VALUES
 (CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'easy', 'https://bit.ly/35I9Jmo', 3 );
+
+INSERT INTO ingredients (name)
+VALUES ('pecorino romano'),
+       ('pasta'),
+       ('black pepper'),
+       ('salt');
