@@ -24,14 +24,12 @@
     }
 
     const getApiResults = async () => {
-
-        const key = "";
         const query = await getQueryString();
 
         if (query !== null) {
             let result;
             try {
-                result = await fetch(`https://api.spoonacular.com/food/products/search?query=${query}&apiKey=${key}`);
+                result = await fetch(`https://api.spoonacular.com/food/products/search?query=${query}&apiKey=${api_key}`);
                 const data = await result.json();
                 console.log(data);
                 data.products.forEach(e => render(e));
