@@ -36,7 +36,7 @@ public class IndexController {
         Recipe recipe3 = recipeRepo.getOne((long) 14);
         model.addAttribute("recipe3", recipe3);
 
-        return "/index";
+        return "index";
     }
 
 //    @GetMapping(path="/")
