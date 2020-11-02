@@ -35,5 +35,5 @@ build/
 ### Applications Properties ###
 src/main/resources/application.properties
 
-proto/
+
 

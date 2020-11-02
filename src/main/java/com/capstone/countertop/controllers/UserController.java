@@ -23,11 +23,21 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("users/profile")
-    public String profilePage(@PathVariable long id, Model model){
+
+    //CHANGES
+    @GetMapping("users/{id}")
+    public String userProfilePage(@PathVariable long id, Model model){
         model.addAttribute("user", userDao.getOne(id));
-        return "/profile";
+        return "/users/profiles";
     }
+
+    @GetMapping("profile")
+    public String profilePages(Model model){
+        String username = "username";
+        model.addAttribute("username", username);
+        return "/users/myprofile";
+    }
+    //CHANGES END
 
     @GetMapping("/users/register")
     public String registerForm(Model model) {
