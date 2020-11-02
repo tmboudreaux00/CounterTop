@@ -23,28 +23,10 @@
         </div>
         <div class="form-group">
             <label for="url">Add an Image </label>
-            <input type="text" th:field="*{url}" id="url" class="form-control">
+            <input type="hidden" th:field="*{url}" id="url" class="form-control">
         </div>
         <div class="form-group">
             <input type="BUTTON" value="Pick Watermark" id="pickWatermark" onclick="pickMark()">
-            <script>
-                var client = filestack.init("AFTklBXEQve8miEwbGlAwz");
-                //The function pickMark()
-                function pickMark() {
-                    console.log("Picking Watermark");
-                    //Opening the file picker here
-                    const options = {
-                        onUploadDone: function (data){
-                            let file = data.filesUploaded[0];
-                            let input = document.getElementById("url");
-                            input.value = file;
-                        },
-                        accept: "image/*",
-                        uploadInBackground: false
-                    };
-                    client.picker(options).open();
-                }
-            </script>
         </div>
         <div class="form-group">
             <label for="skill">Difficulty</label>
@@ -58,5 +40,23 @@
     </form>
 
     <div th:replace="partials/scripts :: scripts"></div>
+    <script>
+        var client = filestack.init("AFTklBXEQve8miEwbGlAwz");
+        //The function pickMark()
+        function pickMark() {
+            console.log("Picking Watermark");
+            //Opening the file picker here
+            const options = {
+                onUploadDone: function (data){
+                    let file = data.filesUploaded[0].url;
+                    let input = document.getElementById("url");
+                    input.value = file;
+                },
+                accept: "image/*",
+                uploadInBackground: false
+            };
+            client.picker(options).open();
+        }
+    </script>
 </body>
 </html>
