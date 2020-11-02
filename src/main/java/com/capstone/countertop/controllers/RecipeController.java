@@ -93,5 +93,4 @@ public class RecipeController {
         recipeRepository.save(recipe);
         return "redirect:/recipes/";
     }
-
 }
