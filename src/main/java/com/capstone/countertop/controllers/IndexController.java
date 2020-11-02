@@ -27,13 +27,13 @@ public class IndexController {
     @GetMapping(path="/")
     public String home(Model model) {
 
-        Recipe recipe = recipeRepo.getOne((long) 11);
+        Recipe recipe = recipeRepo.getOne((long) 1);
         model.addAttribute("recipe", recipe);
 
-        Recipe recipe2 = recipeRepo.getOne((long) 12);
+        Recipe recipe2 = recipeRepo.getOne((long) 2);
         model.addAttribute("recipe2", recipe2);
 
-        Recipe recipe3 = recipeRepo.getOne((long) 14);
+        Recipe recipe3 = recipeRepo.getOne((long) 3);
         model.addAttribute("recipe3", recipe3);
 
         return "index";
