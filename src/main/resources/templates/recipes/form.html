@@ -33,7 +33,16 @@
                 function pickMark() {
                     console.log("Picking Watermark");
                     //Opening the file picker here
-                    client.pick({});
+                    const options = {
+                        onUploadDone: function (data){
+                            let file = data.filesUploaded[0];
+                            let input = document.getElementById("url");
+                            input.value = file;
+                        },
+                        accept: "image/*",
+                        uploadInBackground: false
+                    };
+                    client.picker(options).open();
                 }
             </script>
         </div>
