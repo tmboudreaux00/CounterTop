@@ -8,7 +8,7 @@
 
     <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
-    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}">
+    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}" style="background-color: white">
         <div class="form-group">
             <label for="name">Recipe Title</label>
             <input type="text" class="form-control" id="name" th:field="*{name}">
