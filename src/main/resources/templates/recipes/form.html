@@ -15,11 +15,15 @@
         </div>
         <div class="form-group">
             <label for="description">Recipe Description</label>
-            <input type="text" th:field="*{description}" id="description">
+            <input type="text" th:field="*{description}" id="description" class="form-control">
         </div>
         <div class="form-group">
             <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
-            <textarea id="instructions"></textarea>
+            <textarea id="instructions" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Add an Image </label>
+            <input type="text" th:field="*{url}" id="url" class="form-control">
         </div>
         <div class="form-group">
             <label for="skill">Difficulty</label>
