@@ -63,7 +63,7 @@ public class RecipeController {
         LocalDate now = LocalDate.now();
         java.util.Date date = java.sql.Date.valueOf(now);
         recipe.setDatePublished(date);
-        recipe.setUrl("url"); // CHANGE
+//        recipe.setUrl("url"); // CHANGE
         recipeRepository.save(recipe);
 //        emailService.prepareAndSend(recipe, "New Recipe Submitted!", "Congratulations on submitting your new recipe!");
         return "redirect:/recipes/";
