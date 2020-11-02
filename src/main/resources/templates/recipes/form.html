@@ -6,7 +6,7 @@
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>
 
-    <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
+    <h1 class="py-5 mx-auto text-center">Create a Recipe!</h1>
 
     <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}" style="background-color: white">
         <div class="form-group">
@@ -22,12 +22,13 @@
             <textarea id="instructions" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="url">Add an Image </label>
+<!--            <label for="url">Add an Image </label>-->
             <input type="hidden" th:field="*{url}" id="url" class="form-control">
         </div>
         <div class="form-group">
-            <input type="BUTTON" value="Pick Watermark" id="pickWatermark" onclick="pickMark()">
+            <input type="button" class="btn btn-primary mx-auto" value="Upload an Image" id="pickWatermark" onclick="pickMark()">
         </div>
+        <p id="added"></p>
         <div class="form-group">
             <label for="skill">Difficulty</label>
             <select class="form-control" id="skill" th:field="*{skillLevel}">
@@ -51,6 +52,7 @@
                     let file = data.filesUploaded[0].url;
                     let input = document.getElementById("url");
                     input.value = file;
+                    document.getElementById('added').innerHTML = "Your image has been added!";
                 },
                 accept: "image/*",
                 uploadInBackground: false
