@@ -1,35 +1,35 @@
 package com.capstone.countertop.controllers;
 
 import com.capstone.countertop.models.Comment;
+import com.capstone.countertop.models.Ingredient;
 import com.capstone.countertop.models.Recipe;
 import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.CommentRepository;
+import com.capstone.countertop.repositories.IngredientRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
+import com.capstone.countertop.services.Help;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final CommentRepository commentRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
+    public RecipeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
         this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.commentRepository = commentRepository;
@@ -67,9 +67,14 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/create")
-    public String createRecipe(@ModelAttribute Recipe recipe) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
+        List<Ingredient> list = Help.parseIngredients(ingredients);
+        for(Ingredient ingredient : list) {
+            ingredientRepository.save(ingredient);
+        }
+        recipe.setRecipesIngredients(list);
         LocalDate now = LocalDate.now();
         java.util.Date date = java.sql.Date.valueOf(now);
         recipe.setDatePublished(date);
