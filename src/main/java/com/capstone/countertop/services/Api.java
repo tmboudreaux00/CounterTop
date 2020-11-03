@@ -82,7 +82,7 @@ public class Api {
             JSONObject miniObject = (JSONObject) o;
             Ingredient ingredient = new Ingredient();
             ingredient.setId((long) miniObject.get("id"));
-            ingredient.setName((String) miniObject.get("title"));
+            ingredient.setName((String) miniObject.get("name"));
             list.add(ingredient);
         }
 

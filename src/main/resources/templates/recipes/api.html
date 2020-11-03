@@ -24,7 +24,7 @@
         </div>
         <div class="col-4">
             <ul class="list-group">
-                <li class="list-group-item" th:each="ingredient : ${recipe.getIngredientList()}">DYLAN</li>
+                <li class="list-group-item" th:each="ingredient : ${recipe.getIngredientList()}"><span th:text="${ingredient.getName()}">DYLAN</span></li>
             </ul>
         </div>
     </div>
