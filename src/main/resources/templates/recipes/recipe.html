@@ -34,18 +34,18 @@
             </div>
         </div>
 
-        <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/recipes/favorite}" method="post">
-                <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-                <button type="submit" value="submit">
-                </button>
-                <input type="submit" value="favorite">
-            </form>
-        </div>
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/recipes/favorite}" method="post">
+            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+            <button type="submit" value="submit">
+            </button>
+            <input type="submit" value="favorite">
+        </form>
+    </div>
 
-        <h4>Comments</h4>
+    <h4>Comments</h4>
 
-        <div th:replace="partials/comments :: comments"></div>
+    <div th:replace="partials/comments :: comments"></div>
 
     </div>
 
