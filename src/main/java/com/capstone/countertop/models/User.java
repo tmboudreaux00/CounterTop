@@ -2,9 +2,12 @@ package com.capstone.countertop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,13 +55,14 @@ public class User {
     private List<Like> likes;
 
     //join table for users_favorites
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name="users_favorites",
             joinColumns={@JoinColumn(name="user_id")},
             inverseJoinColumns={@JoinColumn(name="recipe_id")}
     )
-    private List<Recipe> usersFavorites;
+    private List<Recipe> usersFavorites = new ArrayList<>();
+
 
     //join table for users_liked_recipes
     @ManyToMany

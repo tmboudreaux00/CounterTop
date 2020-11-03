@@ -21,6 +21,10 @@
             <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
             <textarea id="instructions" class="form-control"></textarea>
         </div>
+        <div class="form-group" id="ingredients">
+            <label>Ingredients</label>
+            <input type="text" name="ingredient-0">
+        </div>
         <div class="form-group">
 <!--            <label for="url">Add an Image </label>-->
             <input type="hidden" th:field="*{url}" id="url" class="form-control">
@@ -60,5 +64,6 @@
             client.picker(options).open();
         }
     </script>
+
 </body>
 </html>
