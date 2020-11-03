@@ -6,16 +6,17 @@
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>
 
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-4">
                 <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
             </div>
             <div class="col-4">
-                <h4>- Created by <span th:text="${recipe.getUser().getUsername()}">USERNAME</span></h4>
+                <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>
             </div>
         </div>
-        <div class="row">g
+        <div class="row">
             <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="height: 500px; width: 500px; border: 1px solid black;">
         </div>
         <div class="row mt-2">
@@ -32,11 +33,14 @@
                 </ul>
             </div>
         </div>
+
         <h4>Comments</h4>
+
         <!--    <div class="form-group" th:se>-->
         <!--        <label for="exampleFormControlTextarea1">Leave a comment!</label>-->
         <!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
         <!--    </div>-->
+
         <div th:replace="partials/comments :: comments"></div>
 
         <div th:each="item : ${comments}">

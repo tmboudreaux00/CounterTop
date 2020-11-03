@@ -24,6 +24,8 @@ public class Recipe {
     @Size(min = 4, max = 100)
     private String name;
 
+    private int like_count;
+
     // INSTRUCTIONS STRING
 
     @Column(nullable = false) // Change
@@ -80,7 +82,8 @@ public class Recipe {
                   List<User> users,
                   List<Like> likes,
                   List<Tag> tags,
-                  List<Ingredient> recipesIngredients) {
+                  List<Ingredient> recipesIngredients,
+                  int like_count) {
         this.id = id;
         this.description = description;
         this.name = name;
@@ -93,6 +96,15 @@ public class Recipe {
         this.likes = likes;
         this.tags = tags;
         this.recipesIngredients = recipesIngredients;
+        this.like_count = like_count;
+    }
+
+    public int getLike_count() {
+        return like_count;
+    }
+
+    public void setLike_count(int like_count) {
+        this.like_count = like_count;
     }
 
     public Date getDatePublished() {
