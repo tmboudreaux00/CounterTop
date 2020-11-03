@@ -12,7 +12,6 @@ import com.capstone.countertop.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-
 @Controller
 public class UserController {
     private final UserRepository userDao;
