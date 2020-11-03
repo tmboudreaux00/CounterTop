@@ -16,6 +16,12 @@
         </div>
     </form>
 
+    <div id="api-results" class="container">
+        <div th:each="recipe : ${response}">
+            <a th:href="@{/recipes/api/{id}(id=${recipe.getId()})}" th:text="${recipe.getTitle()}"></a>
+        </div>
+    </div>
+
     <div class="container">
         <div class="mx-auto w-90 d-flex justify-content-around row row-cols-4">
             <div class="col-3" th:each="recipe : ${recipes}">
