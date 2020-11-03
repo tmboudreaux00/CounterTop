@@ -24,7 +24,8 @@ public class Recipe {
     @Size(min = 4, max = 100)
     private String name;
 
-    // INSTRUCTIONS STRING
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String instructions;
 
     @Column(nullable = false) // Change
     private String skillLevel;
@@ -189,5 +190,13 @@ public class Recipe {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 }

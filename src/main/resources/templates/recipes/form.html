@@ -19,8 +19,8 @@
             <input type="text" th:field="*{description}" id="description">
         </div>
         <div class="form-group">
-            <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
-            <textarea id="instructions"></textarea>
+            <label for="instructions">Recipe Instructions</label>
+            <textarea id="instructions" th:field="*{instructions}"></textarea>
         </div>
         <div class="form-group" id="ingredients">
             <label id="ingredient-label" for="ingredient-0">Ingredients</label>

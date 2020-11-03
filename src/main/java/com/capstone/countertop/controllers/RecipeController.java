@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,13 +43,16 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}")
-    public String showRecipe(@PathVariable long id, Model model) {
-//        User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String showRecipe(@PathVariable long id, Model model, Principal user) {
         model.addAttribute("recipe", recipeRepository.getOne(id));
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
-//        if(current != null)
-//            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
+        if(user != null) {
+            User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            current = userRepository.getOne(current.getId());
+            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
+        }
+
         return "recipes/recipe";
     }
 
@@ -67,7 +71,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/create")
-    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients, @RequestParam(name="instructions") String instructions) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
         List<Ingredient> list = Help.parseIngredients(ingredients);
@@ -110,19 +114,16 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/favorite")
-    public String favoriteRecipe(@RequestParam(name="recipeID") long id) {
+    public String favoriteRecipe(@RequestParam(name="recipeID") long id, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = userRepository.getOne(user.getId());
         Recipe recipe = recipeRepository.getOne(id);
 
         if(user.getUsersFavorites().contains(recipe)) {
-            System.out.println("Old Recipe");
             user.getUsersFavorites().remove(recipe);
         }
         else {
-            System.out.println("New Recipe");
             user.getUsersFavorites().add(recipe);
-            System.out.println(user.getUsersFavorites().toString());
         }
         userRepository.save(user);
 

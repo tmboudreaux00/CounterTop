@@ -34,11 +34,10 @@
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/recipes/favorite}" method="post">
             <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-<!--            <button type="submit" value="submit">-->
-<!--                <i class="far fa-star" th:if="${favorited}"></i>-->
-<!--                <i class="fas fa-star" th:if="${not favorited}"></i>-->
-<!--            </button>.-->
-            <input type="submit" value="favorite">
+            <button>
+                <i class="far fa-star" th:if="${favorited}"></i>
+                <i class="fas fa-star" th:if="${not favorited}"></i>
+            </button>
         </form>
     </div>
 
