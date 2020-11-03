@@ -17,7 +17,9 @@
     </form>
 
     <div id="api-results" class="container">
-
+        <div th:each="recipe : ${response}">
+            <a th:href="@{/recipes/api/{id}(id=${recipe.getId()})}" th:text="${recipe.getTitle()}"></a>
+        </div>
     </div>
 
     <div class="container">
@@ -34,8 +36,6 @@
         </div>
     </div>
 
-<!--    <script th:src="@{/js/keys.js}"></script>-->
-<!--    <script th:src="@{/js/index.js}"></script>-->
     <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

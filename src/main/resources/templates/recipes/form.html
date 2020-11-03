@@ -8,7 +8,7 @@
 
     <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
-    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}">
+    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}" id="createForm">
         <div class="form-group">
             <label for="name">Recipe Title</label>
             <input type="text" class="form-control" id="name" th:field="*{name}">
@@ -20,6 +20,10 @@
         <div class="form-group">
             <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
             <textarea id="instructions"></textarea>
+        </div>
+        <div class="form-group" id="ingredients">
+            <label>Ingredients</label>
+            <input type="text" name="ingredient-0">
         </div>
         <div class="form-group">
             <label for="skill">Difficulty</label>
@@ -33,5 +37,6 @@
     </form>
 
     <div th:replace="partials/scripts :: scripts"></div>
+
 </body>
 </html>

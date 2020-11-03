@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/head :: head (title='Recipe')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <h1 th:text="${recipe.getTitle()}"></h1>
+        </div>
+        <div class="col-4">
+            <h4>- Provided by <span>Spoonacular</span></h4>
+        </div>
+    </div>
+    <div class="row">
+        <img th:src="${recipe.getImage()}" class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 100%">
+    </div>
+    <div class="row mt-2">
+        <div class="col-8" th:utext="${recipe.getDescription()}">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
+        </div>
+        <div class="col-4">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="ingredient : ${recipe.getIngredientList()}">DYLAN</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" th:utext="${recipe.getInstructions()}"></div>
+    </div>
+</div>
+
+<div th:replace="partials/scripts :: scripts"></div>
+</body>
+</html>

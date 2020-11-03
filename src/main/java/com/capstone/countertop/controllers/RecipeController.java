@@ -6,12 +6,17 @@ import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.CommentRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
+import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -117,6 +122,19 @@ public class RecipeController {
         userRepository.save(user);
 
         return "redirect:/recipes/" + id;
+    }
+
+    @GetMapping("/recipes/api/{id}")
+    public String getApiRecipe(@PathVariable long id, Model model) {
+        try {
+            model.addAttribute("recipe",Api.getRecipe("https://api.spoonacular.com/recipes/"+ id +"/information?includeNutrition=false"));
+            model.addAttribute("comment", new Comment());
+            model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return "recipes/api";
     }
 
 }
