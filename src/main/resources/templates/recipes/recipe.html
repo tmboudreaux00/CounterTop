@@ -34,44 +34,20 @@
             </div>
         </div>
 
-<!--<<<<<<< HEAD-->
-<!--        <h4>Comments</h4>-->
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/recipes/favorite}" method="post">
+                <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+                <button type="submit" value="submit">
+                </button>
+                <input type="submit" value="favorite">
+            </form>
+        </div>
 
-<!--        &lt;!&ndash;    <div class="form-group" th:se>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <label for="exampleFormControlTextarea1">Leave a comment!</label>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>&ndash;&gt;-->
-<!--        &lt;!&ndash;    </div>&ndash;&gt;-->
+        <h4>Comments</h4>
 
-<!--        <div th:replace="partials/comments :: comments"></div>-->
-
-<!--        <div th:each="item : ${comments}">-->
-<!--            <p th:text="${item.getCommentBody()}">COMMENT HERE</p>-->
-<!--            <p>- <span th:text="${item.getUser().getUsername()}"></span></p>-->
-<!--        </div>-->
-<!--=======-->
-
-    <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/recipes/favorite}" method="post">
-            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-            <button type="submit" value="submit">
-<!--                <i class="far fa-star" th:if="${favorited}"></i>-->
-<!--                <i class="fas fa-star" th:if="${not favorited}"></i>-->
-            </button>.
-            <input type="submit" value="favorite">
-        </form>
-    </div>
-
-    <h4>Comments</h4>
-<!--    <div class="form-group" th:se>-->
-<!--        <label for="exampleFormControlTextarea1">Leave a comment!</label>-->
-<!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-<!--    </div>-->
-    <div th:replace="partials/comments :: comments"></div>
->>>>>>> backendAPI
+        <div th:replace="partials/comments :: comments"></div>
 
     </div>
-
-
 
     <div th:replace="partials/scripts :: scripts"></div>
 </body>
