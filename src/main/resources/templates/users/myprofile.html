@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>CounterTop Profile</title>
+<head th:replace="partials/head :: head (title='Countertop')">
+
     <div th:replace="partials/links :: links"></div>
 </head>
 <body>
@@ -15,7 +15,6 @@
     }
 </style>
 
-
 <div class="container-fluid mx-4" style="background-color: rgba(255, 255, 255, 0.5);">
     <h4 class="my-3 text-center" id="theChef">The Chef</h4>
     <!-- PROFILE INFORMATION -->
@@ -23,9 +22,9 @@
     <div class="border col d-flex">
 
         <!-- PROFILE PHOTO -->
-        <div class="my-2" id="profilePhotoGroup">
-            <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
-                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="../src/main/resources/static/images/augustine-wong-li0iC0rjvvg-unsplash%20(1).jpg" alt="Profile Photo" />
+        <div class="my-2">
+            <div class="bg-dark border my-2" style="min-height: 300px; min-width: 300px; position: relative;">
+                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="..." alt="Profile Photo" />
             </div>
             <div class="text-right">
                 <button class="btn btn-primary" data-toggle="modal" type="submit" value="Edit" style="width: 75px;" data-target="#profilePhotoModal">Edit</button>
@@ -45,29 +44,11 @@
                             <span class="ml-1 userDetails" th:text="${#authentication.getPrincipal().getUsername()}"> SuperChef </span>
                         </div>
                         <div class="ml-1">
-                            <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#usernameModal">Edit</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#usernameModal" value="Edit" style="width: 75px; height: 40px;">Edit</button>
                         </div>
+
                     </div>
                 </div>
-
-                <div class="modal" tabindex="-1" role="dialog" id="usernameModal">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <form action="/">
-                                    <label for="username">Username</label><br />
-                                    <input type="text" id="username" value="${}" />
-                                    <button class="btn btn-primary" type="submit"> Save </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
 
 
                 <div class="my-4 w-100" id="profileEmailGrp">
@@ -79,7 +60,7 @@
                             <span class="ml-1 userDetails" th:text="${#authentication.getPrincipal().getEmail()}"> SuperChef@thesuperchef.com </span>
                         </div>
                         <div class="ml-1">
-                            <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px; height: 40px;">Edit</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#emailModal" type="submit" value="Edit" style="width: 75px; height: 40px;">Edit</button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +91,7 @@
                                 <span class="ml-1 userDetails" th:text="${#authentication.getPrincipal().getDob()}"> 11/12/2020 </span>
                             </div>
                             <div class="ml-1">
-                                <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px; height: 40px;">Edit</button>
+                                <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#DOBModal" value="Edit" style="width: 75px; height: 40px;">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -120,9 +101,94 @@
         </div>
     </div>
 
+    <!--SPACER / MODAL CONTENTS-->
+    <div class="w-100" style="height: 100px;">
 
-        <!--SPACER-->
-        <div class="w-100" style="height: 100px;"></div>
+        <div class="modal" tabindex="-1" role="dialog" id="profilePhotoModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form action="/">
+                            <label for="profilePhoto">Profile Photo</label><br />
+                            <input type="text" id="profilePhoto" value="${#authentication.getPrincipal().getUsername()}" />
+                            <button class="btn btn-primary" type="submit"> Save </button>
+                        </form>
+
+                        <div class="my-2" id="profilePhotoGroup">
+                            <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
+                                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="..." alt="Profile Photo" />
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px;">Edit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal my-auto" tabindex="-1" role="dialog" id="usernameModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="align-content-start modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/update/{id}(id=${user.id})}"
+                        th:object="${user}"
+                        method="post">
+                            <input type="text" id="username" th:field="${#authentication.getPrincipal().getUsername()}" /><br />
+                            <small id="usernameHelp" class="form-text text-muted">Choose your username. Must be between 0-100 characters, numbers and letters only.</small>
+                            <button class="btn btn-primary" type="submit"> Save </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="emailModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form action="/">
+                            <label for="email">Email</label><br />
+                            <input type="text" id="email" />
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><br />
+                            <button class="btn btn-primary" type="submit"> Save </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="DOBModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form action="/">
+                            <label for="dob">Birthday</label><br />
+                            <input type="text" id="dob" th:attr="value=${#authentication.getPrincipal().getDob()}" />
+                            <small id="dobHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
+                            <button class="btn btn-primary" type="submit"> Save </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--        <div class="container-fluid mx-4" style="background-color: white;">-->
 <!--            &lt;!&ndash; RECIPE INFORMATION &ndash;&gt;-->
@@ -249,8 +315,15 @@
 
 
 
+<!--<div th:fragment="scripts">-->
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" th:inline="javascript"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous" th:inline="javascript"></script>-->
+<!--</div>-->
 
-<div th:replace="/partials/footer :: footer"></div>
+
 <div th:replace="/partials/scripts :: scripts"></div>
+<div th:replace="/partials/footer :: footer"></div>
+
+
 </body>
 </html>

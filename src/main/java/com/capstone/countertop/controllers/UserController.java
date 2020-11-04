@@ -3,6 +3,7 @@ package com.capstone.countertop.controllers;
 import com.capstone.countertop.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.validation.Valid;
 
 
 @Controller
@@ -36,6 +38,13 @@ public class UserController {
         String username = "username";
         model.addAttribute("username", username);
         return "/users/myprofile";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
+        userDao.save(user);
+        model.addAttribute("user", userDao.findAll());
+        return "redirect:/profile";
     }
     //CHANGES END
 
