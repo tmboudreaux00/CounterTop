@@ -17,93 +17,109 @@
     }
 </style>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profilePhotoModal">
-    Launch demo modal
-</button>
 
 
 
 
+<div>
+<div>
+<!--    <div class="ml-1">-->
+<!--        <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#profilePhotoModal">EditPhoto</button>-->
+<!--    </div>-->
 
-<div class="modal" tabindex="-1" role="dialog" id="profilePhotoModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <form action="/">
-                    <label for="profilePhoto">Profile Photo</label><br />
-                    <input type="text" id="profilePhoto" value="${}" />
-                    <button class="btn btn-primary" type="submit"> Save </button>
-                </form>
+<!--    <div class="ml-1">-->
+<!--        <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#usernameModal">EditUsername</button>-->
+<!--    </div>-->
 
-                <div class="my-2" id="profilePhotoGroup">
-                    <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
-                        <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="../src/main/resources/static/images/augustine-wong-li0iC0rjvvg-unsplash%20(1).jpg" alt="Profile Photo" />
+<!--    <div class="ml-1">-->
+<!--        <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#emailModal">EditEmail</button>-->
+<!--    </div>-->
+
+<!--    <div class="ml-1">-->
+<!--        <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#DOBModal">EditDOB</button>-->
+<!--    </div>-->
+</div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="profilePhotoModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form action="/">
+                        <label for="profilePhoto">Profile Photo</label><br />
+                        <input type="text" id="profilePhoto" value="${#authentication.getPrincipal().getUsername()}" />
+                        <button class="btn btn-primary" type="submit"> Save </button>
+                    </form>
+
+                    <div class="my-2" id="profilePhotoGroup">
+                        <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
+                            <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="../src/main/resources/static/images/augustine-wong-li0iC0rjvvg-unsplash%20(1).jpg" alt="Profile Photo" />
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px;">Edit</button>
+                        </div>
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px;">Edit</button>
-                    </div>
+
                 </div>
-
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal" tabindex="-1" role="dialog" id="usernameModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-                <form action="/">
-                    <label for="username">Username</label><br />
-                    <input type="text" id="username" th:attr="value=${session.user.getusername}" />
-                    <button class="btn btn-primary" type="submit"> Save </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal" tabindex="-1" role="dialog" id="emailModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal" tabindex="-1" role="dialog" id="usernameModal" th:fragment="editUsername">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <form action="/">
-                    <label for="email">Email</label><br />
-                    <input type="text" id="email" value="${}" />
-                    <button class="btn btn-primary" type="submit"> Save </button>
-                </form>
+                    <form action="/">
+                        <label for="username">Username</label><br />
+                        <input type="text" id="username" th:attr="value=${#authentication.getPrincipal().getEmail()}" />
+                        <button class="btn btn-primary" type="submit"> Save </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal" tabindex="-1" role="dialog" id="DOBModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <form action="/">
-                    <label for="dob">Birthday</label><br />
-                    <input type="text" id="dob" value="${}" />
-                    <button class="btn btn-primary" type="submit"> Save </button>
-                </form>
+    <div class="modal" tabindex="-1" role="dialog" id="emailModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form action="/">
+                        <label for="email">Email</label><br />
+                        <input type="text" id="email" value="${}" />
+                        <button class="btn btn-primary" type="submit"> Save </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="modal" tabindex="-1" role="dialog" id="DOBModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form action="/">
+                        <label for="dob">Birthday</label><br />
+                        <input type="text" id="dob" value="${}" />
+                        <button class="btn btn-primary" type="submit"> Save </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div><!-- FRAGMENT -->
 
 
     <div>

@@ -25,72 +25,39 @@
     <div class="border col d-flex">
 
         <!-- PROFILE PHOTO -->
-        <div class="my-2" id="profilePhotoGroup">
-            <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
+        <div class="col-2"></div>
+        <div class="col-4 my-2">
+            <div class="bg-dark border mx-auto my-2" id="profileImg" style="height: 300px; width: 300px; position: relative;">
                 <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="../src/main/resources/static/images/augustine-wong-li0iC0rjvvg-unsplash%20(1).jpg" alt="Profile Photo" />
             </div>
         </div>
 
-        <!-- USERNAME & EMAIL -->
-        <div class="col border d-flex ml-3 my-auto py-2">
-            <div class="col">
 
-                <div class="my-4 w-100" id="profileUsernameGrp">
-                    <div>
+            <!-- USERNAME & SIGN UP DATE -->
+            <div class="col-4 my-auto">
+                <div class="col my-4">
+                    <div style="background-color: white;">
                         <span class="align-middle"> Username </span>
                     </div>
-                    <div class="d-flex">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${user.getUsername()}"> SuperChef </span>
-                        </div>
+
+                    <div class="border" style="background-color: white;">
+                        <span class="ml-1 userDetails" id="userName" th:text="${user.getUsername()}"> SuperChef </span>
                     </div>
                 </div>
 
-
-                <div class="my-4 w-100" id="profileEmailGrp">
+                <div class="col my-4">
                     <div>
-                        <span class="align-middle"> Email </span>
+                        <span class="align-middle"> Join Date </span>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
-                        </div>
+
+                    <div class="border" style="background-color: white;">
+                        <span class="mx-1 userDetails" style="height: 40px;" th:text="${user.getSignupDate()}">10/28/2000</span>
                     </div>
                 </div>
-
             </div>
 
-            <!-- SIGN UP DATE & DOB -->
-            <div class="col">
+            <div class="col-2"></div>
 
-                <div class="my-4 w-100" id="profileSignUpGrp">
-                    <div>
-                        <span class="align-middle"> Sign Up Date </span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${#authentication.getPrincipal().getSignupDate()}">10/28/2000</span>
-                        </div>
-                        <div class="ml-1"><div style="width: 75px; height: 40px;"></div>
-                        </div>
-                    </div>
-
-                    <div class="my-4 w-100" id="profileDOBGrp">
-                        <div>
-                            <span class="align-middle"> Birthday </span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="border w-100" style="background-color: white;">
-                                <span class="ml-1 userDetails" th:text="${#authentication.getPrincipal().getDob()}"> 11/12/2020 </span>
-                            </div>
-                            <div class="ml-1">
-                                <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px; height: 40px;">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
     <!--SPACER-->
