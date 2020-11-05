@@ -92,8 +92,7 @@ body {
     color: #55595c;
     text-align: left;
     /*background-color: #fff;*/
-    background-image: url("../images/marble-white.jpg") !important;
-    background-size: cover;
+    background-image: url("../images/augustine-wong-li0iC0rjvvg-unsplash (1).jpg");
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
