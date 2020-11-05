@@ -43,11 +43,10 @@
 <!--        &lt;!&ndash;    </div>&ndash;&gt;-->
 
 <!--        <div th:replace="partials/comments :: comments"></div>-->
-
-<!--        <div th:each="item : ${comments}">-->
-<!--            <p th:text="${item.getCommentBody()}">COMMENT HERE</p>-->
-<!--            <p>- <span th:text="${item.getUser().getUsername()}"></span></p>-->
-<!--        </div>-->
+        <!--        <div th:each="item : ${comments}">-->
+        <!--            <p th:text="${item.getCommentBody()}">COMMENT HERE</p>-->
+        <!--            <p>- <span th:text="${item.getUser().getUsername()}"></span></p>-->
+        <!--        </div>-->
 <!--=======-->
 
     <div sec:authorize="isAuthenticated()">
