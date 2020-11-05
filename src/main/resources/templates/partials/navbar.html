@@ -64,7 +64,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/users/recipes">My Recipes</a>
                             <!--                        <a class="dropdown-item" href="#">Groceries</a>--> <!-- REMOVE -->
-                            <a class="dropdown-item" href="/profile">All About Me</a>
+
+                            <a href="#" th:href="@{/profile/{id}(id=${#authentication.getPrincipal().getId()})}" class="dropdown-item">All About Me</a>
                             <div class="dropdown-divider"></div>
                                 <form th:action="@{/logout}" th:method="post" id="form1">
                                     <a href="#" onclick="document.getElementById('form1').submit();" class="dropdown-item" >Log Out</a>

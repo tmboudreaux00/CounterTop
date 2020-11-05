@@ -21,7 +21,7 @@
 
 
 
-<div>
+<div th:fragment="userDetailsEdit(editPhoto, editUsername, editEmail, editDOB)">
 <div>
 <!--    <div class="ml-1">-->
 <!--        <button class="btn btn-primary" data-toggle="modal" value="Edit" style="width: 75px; height: 40px;" data-target="#profilePhotoModal">EditPhoto</button>-->
@@ -40,7 +40,7 @@
 <!--    </div>-->
 </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="profilePhotoModal">
+    <div class="modal" tabindex="-1" role="dialog" id="profilePhotoModal" th:object="editPhoto">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -68,7 +68,7 @@
     </div>
 
 
-    <div class="modal" tabindex="-1" role="dialog" id="usernameModal" th:fragment="editUsername">
+    <div class="modal" tabindex="-1" role="dialog" id="usernameModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -77,7 +77,7 @@
                 </button>
                     <form action="/">
                         <label for="username">Username</label><br />
-                        <input type="text" id="username" th:attr="value=${#authentication.getPrincipal().getEmail()}" />
+                        <input type="text" id="username" th:attr="value=${session.user.getusername}" />
                         <button class="btn btn-primary" type="submit"> Save </button>
                     </form>
                 </div>

@@ -33,19 +33,35 @@ public class UserController {
         return "/users/profiles";
     }
 
-    @GetMapping("profile")
-    public String profilePages(Model model){
-        String username = "username";
-        model.addAttribute("username", username);
+    @GetMapping("profile/{id}")
+    public String profilePages(@PathVariable("id") long id, Model model){
+        User user = userDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        model.addAttribute("user", user);
         return "/users/myprofile";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
-        userDao.save(user);
-        model.addAttribute("user", userDao.findAll());
-        return "redirect:/profile";
+    @GetMapping("edit/{id}")
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        User user = userDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        model.addAttribute("user", user);
+        return "/users/myprofile";
     }
+
+    @PostMapping("update/{id}")
+    public String updateStudent(@PathVariable("id") long id, @Valid User user, BindingResult result,
+                                Model model) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            return "/users/myprofile";
+        }
+
+        userDao.save(user);
+        model.addAttribute("users", userDao.findAll());
+        return "/users/myprofile";
+    }
+
     //CHANGES END
 
     @GetMapping("/users/register")

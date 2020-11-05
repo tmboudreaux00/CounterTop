@@ -140,12 +140,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="#" th:action="@{/update/{id}(id=${user.id})}"
-                        th:object="${user}"
-                        method="post">
-                            <input type="text" id="username" th:field="${#authentication.getPrincipal().getUsername()}" /><br />
-                            <small id="usernameHelp" class="form-text text-muted">Choose your username. Must be between 0-100 characters, numbers and letters only.</small>
-                            <button class="btn btn-primary" type="submit"> Save </button>
+                        <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+                            <input type="text" id="username" th:field="*{username}" /><br />
+                            <small id="usernameHelp" class="form-text text-muted">Choose your username. Must be 3-24 characters.</small>
+                            <input class="btn btn-primary" type="submit" value=" Save " />
                         </form>
                     </div>
                 </div>
@@ -160,10 +158,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <form action="/">
+                            <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
                             <label for="email">Email</label><br />
-                            <input type="text" id="email" />
+                            <input type="text" id="email" th:field="*{email}" /><br />
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><br />
-                            <button class="btn btn-primary" type="submit"> Save </button>
+                            <input class="btn btn-primary" type="submit" value=" Save " />
                         </form>
                     </div>
                 </div>
@@ -177,11 +176,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <form action="/">
+                        <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
                             <label for="dob">Birthday</label><br />
-                            <input type="text" id="dob" th:attr="value=${#authentication.getPrincipal().getDob()}" />
+                            <input type="text" id="dob" th:field="*{dob}" />
                             <small id="dobHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
-                            <button class="btn btn-primary" type="submit"> Save </button>
+                            <input class="btn btn-primary" type="submit" value=" Save " />
                         </form>
                     </div>
                 </div>
