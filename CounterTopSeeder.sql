@@ -29,6 +29,7 @@ VALUES
 
 
 #Seeds Recipes
+<<<<<<< HEAD
 INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
 VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'beginner', 'www.countertop.com', '5', 0),
        (CURDATE(), 'Recipe #2 Description', 'Recipe #2', 'easy', 'www.countertop.com', '4', 0),
@@ -41,6 +42,22 @@ VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'beginner', 'www.counte
        (CURDATE(), 'Recipe #9 Description', 'Recipe #9', 'difficult', 'www.countertop.com', '3', 0),
        (CURDATE(), 'Recipe #10 Description', 'Recipe #10', 'chef', 'www.countertop.com', '2', 0);
 
+=======
+INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
+VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'yum', 'beginner', 'www.countertop.com', '5'),
+       (CURDATE(), 'Recipe #2 Description', 'Recipe #2', 'yum', 'easy', 'www.countertop.com', '4'),
+       (CURDATE(), 'Recipe #3 Description', 'Recipe #3', 'yum', 'medium', 'www.countertop.com', '3'),
+       (CURDATE(), 'Recipe #4 Description', 'Recipe #4', 'yum', 'difficult', 'www.countertop.com', '2'),
+       (CURDATE(), 'Recipe #5 Description', 'Recipe #5', 'yum', 'chef', 'www.countertop.com', '3'),
+       (CURDATE(), 'Recipe #6 Description', 'Recipe #6', 'yum', 'beginner', 'www.countertop.com', '4'),
+       (CURDATE(), 'Recipe #7 Description', 'Recipe #7', 'yum', 'easy', 'www.countertop.com', '5'),
+       (CURDATE(), 'Recipe #8 Description', 'Recipe #8', 'yum', 'medium', 'www.countertop.com', '4'),
+       (CURDATE(), 'Recipe #9 Description', 'Recipe #9', 'yum', 'difficult', 'www.countertop.com', '3'),
+       (CURDATE(), 'Recipe #10 Description', 'Recipe #10', 'yum', 'chef', 'www.countertop.com', '2'),
+       (CURDATE(), 'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
+        'Cacio e Pepe', 'yum', 'beginner', 'https://bit.ly/31KeydW', 3),
+       (CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'yum','Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 );
+>>>>>>> 32812aabea45d788fd695d6e80df641e8d74f00a
 
 #Seeds Tags
 INSERT INTO tags (name)
@@ -94,8 +111,9 @@ VALUES
 
 ALTER TABLE recipes AUTO_INCREMENT = 1;
 
-INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
+INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
 VALUES
+<<<<<<< HEAD
 (CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 ),
 (CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'easy', 'https://bit.ly/35I9Jmo', 3),
 (CURDATE(), 'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
@@ -103,6 +121,13 @@ VALUES
 (CURDATE(), 'Do you love the flavor of saucy barbecue chicken but not the hours spent tending to the smoker? We’ve got you.',
  'Smokehouse Pulled Chicken Bowls', 'beginner', 'https://bit.ly/31KeydW', 3);
 
+=======
+(CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'yum', 'easy', 'https://bit.ly/37MQieW', 3 );
+
+INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
+VALUES
+(CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'yum','easy', 'https://bit.ly/35I9Jmo', 3 );
+>>>>>>> 32812aabea45d788fd695d6e80df641e8d74f00a
 
 INSERT INTO ingredients (name)
 VALUES ('pecorino romano'),

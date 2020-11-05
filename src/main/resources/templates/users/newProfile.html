@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='Register')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
+
+<div class="container-fluid mx-4" style="background-color: rgba(255, 255, 255, 0.5);">
+    <h4 class="my-3 text-center" id="theChef" th:text="${user.getUsername()}">The Chef</h4>
+    <!-- PROFILE INFORMATION -->
+
+    <div class="border col d-flex">
+
+        <!-- PROFILE PHOTO -->
+        <div class="my-2">
+            <div class="bg-dark border my-2" style="min-height: 300px; min-width: 300px; position: relative;">
+                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);"  th:src="${user.getUrl()}" alt="Profile Photo" />
+            </div>
+        </div>
+
+        <!-- USERNAME & EMAIL -->
+        <div class="col border d-flex ml-3 my-auto py-2">
+            <div class="col">
+
+                <div class="my-4 w-100" id="profileUsernameGrp">
+                    <div>
+                        <span class="align-middle"> Username </span>
+                    </div>
+                    <div class="d-flex">
+                        <div class="border w-100" style="background-color: white;">
+                            <span class="ml-1 userDetails" th:text="${user.getUsername()}"> SuperChef </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="my-4 w-100" id="profileEmailGrp">
+                    <div>
+                        <span class="align-middle"> Email </span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="border w-100" style="background-color: white;">
+                            <span class="ml-1 userDetails" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIGN UP DATE & DOB -->
+            <div class="col">
+
+                <div class="my-4 w-100" id="profileSignUpGrp">
+                    <div>
+                        <span class="align-middle"> Member Since </span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="border w-100" style="background-color: white;">
+                            <span class="ml-1 userDetails" th:text="${user.getSignupDate()}">10/28/2000</span>
+                        </div>
+                        <div class="ml-1"><div style="width: 75px; height: 40px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="my-4 w-100" id="profileDOBGrp">
+                        <div>
+                            <span class="align-middle"> Birthday </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="border w-100" style="background-color: white;">
+                                <span class="ml-1 userDetails" th:text="${user.getDob()}"> 11/12/2020 </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/user/update}" method="POST" class="shadow w-50 p-3 mx-auto" style="background-color: white">
+                        <input type="hidden" name="id" th:value="${user.getId()}">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:value="${user.getEmail()}" name="email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" th:value="${user.getUsername()}" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_old">Old Password</label>
+                            <input type="password" class="form-control" id="password_old" name="password_old">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_new">New Password</label>
+                            <input type="password" class="form-control" id="password_new" name="password_new">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" th:value="${user.getUrl()}" name="url" id="url" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary mx-auto" value="Upload an Image" id="pickWatermark" onclick="pickMark()">
+                        </div>
+                        <p id="added"></p>
+                        <div class="form-group">
+                            <label for="date">Date of Birth</label>
+                            <input type="date" class="form-control" th:value="${user.getDob()}" id="date" name="date">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="partials/scripts :: scripts"></div>
+<script>
+    var client = filestack.init("AFTklBXEQve8miEwbGlAwz");
+    //The function pickMark()
+    function pickMark() {
+        console.log("Picking Watermark");
+        //Opening the file picker here
+        const options = {
+            onUploadDone: function (data){
+                let file = data.filesUploaded[0].url;
+                let input = document.getElementById("url");
+                input.value = file;
+                document.getElementById('added').innerHTML = "Your image has been added!";
+            },
+            accept: "image/*",
+            uploadInBackground: false
+        };
+        client.picker(options).open();
+    }
+</script>
+</body>
+</html>

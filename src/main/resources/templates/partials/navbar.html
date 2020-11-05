@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <standard_links th:fragment="navbar">
 
@@ -46,17 +46,21 @@
 
                     <li class="ml-4 mr-0 nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="..." alt="profile photo" />
+                            <img th:src="..." alt="profile photo" />
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/users/recipes">My Recipes</a>
-                            <!--                        <a class="dropdown-item" href="#">Groceries</a>--> <!-- REMOVE -->
-                            <a class="dropdown-item" href="/profile">All About Me</a>
+                            <a class="dropdown-item" href="#">My Recipes</a>
+
+                            <a class="dropdown-item" href="/user/profile">All About Me</a>
 
                             <div class="dropdown-divider"></div>
+
+<!--                            <a class="dropdown-item" href="/logout">Logout</a>-->
+
                                 <form th:action="@{/logout}" th:method="post" id="form1">
                                     <a href="#" onclick="document.getElementById('form1').submit();" class="dropdown-item" >Log Out</a>
                                 </form>
+                            
                         </div>
                     </li>
                 </ul>
