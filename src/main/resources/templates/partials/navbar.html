@@ -54,9 +54,13 @@
                             <a class="dropdown-item" href="/profile">All About Me</a>
 
                             <div class="dropdown-divider"></div>
+
+<!--                            <a class="dropdown-item" href="/logout">Logout</a>-->
+
                                 <form th:action="@{/logout}" th:method="post" id="form1">
                                     <a href="#" onclick="document.getElementById('form1').submit();" class="dropdown-item" >Log Out</a>
                                 </form>
+                            
                         </div>
                     </li>
                 </ul>

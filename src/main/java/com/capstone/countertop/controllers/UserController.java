@@ -37,7 +37,7 @@ public class UserController {
     public String profilePages(Model model){
         String username = "username";
         model.addAttribute("username", username);
-        return "/users/myprofile";
+        return "users/myprofile";
     }
 
     @PostMapping("/update/{id}")
