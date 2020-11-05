@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+
     Recipe getOne(Long id);
     Recipe findByName(String name);
     Recipe findFirstByName(String name);
