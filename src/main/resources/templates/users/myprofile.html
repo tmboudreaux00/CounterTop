@@ -140,10 +140,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="#" th:action="@{/update/{id}(id=${user.id})}"
-                        th:object="${user}"
-                        method="post">
-                            <input type="text" id="username" th:field="${#authentication.getPrincipal().getUsername()}" /><br />
+                        <form action="#" method="post">
+                            <input type="text" id="username" th:text="${#authentication.getPrincipal().getUsername()}"/><br />
                             <small id="usernameHelp" class="form-text text-muted">Choose your username. Must be between 0-100 characters, numbers and letters only.</small>
                             <button class="btn btn-primary" type="submit"> Save </button>
                         </form>
