@@ -15,7 +15,7 @@
             const childInput = ingredients.lastElementChild;
             const name = childInput.getAttribute("name");
             const number = parseInt(name.slice("ingredient".length+1, name.length)) + 1;
-            const html = `<br><input type="text" name="ingredient-${number}" id="ingredient-${number}">`;
+            const html = `<br><input type="text" name="ingredient-${number}" id="ingredient-${number}" class="form-control">`;
             document.getElementById("ingredient-label").setAttribute("for",`ingredient-${number}`);
             childInput.insertAdjacentHTML("afterend",html);
             const newChild = ingredients.lastElementChild;
