@@ -1,24 +1,23 @@
 package com.capstone.countertop.controllers;
 
 import com.capstone.countertop.models.Comment;
+import com.capstone.countertop.models.Ingredient;
 import com.capstone.countertop.models.Recipe;
 import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.CommentRepository;
+import com.capstone.countertop.repositories.IngredientRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
+import com.capstone.countertop.services.Help;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.security.Principal;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import java.util.List;
@@ -26,12 +25,14 @@ import java.util.List;
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final CommentRepository commentRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
+    public RecipeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
         this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.commentRepository = commentRepository;
@@ -44,13 +45,16 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}")
-    public String showRecipe(@PathVariable long id, Model model) {
-//        User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String showRecipe(@PathVariable long id, Model model, Principal user) {
         model.addAttribute("recipe", recipeRepository.getOne(id));
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
-//        if(current != null)
-//            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
+        if(user != null) {
+            User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            current = userRepository.getOne(current.getId());
+            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
+        }
+
         return "recipes/recipe";
     }
 
@@ -69,9 +73,14 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/create")
-    public String createRecipe(@ModelAttribute Recipe recipe) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients, @RequestParam(name="instructions") String instructions) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
+        List<Ingredient> list = Help.parseIngredients(ingredients);
+        for(Ingredient ingredient : list) {
+            ingredientRepository.save(ingredient);
+        }
+        recipe.setRecipesIngredients(list);
         LocalDate now = LocalDate.now();
         java.util.Date date = java.sql.Date.valueOf(now);
         recipe.setDatePublished(date);
@@ -108,19 +117,16 @@ public class RecipeController {
 
 
     @PostMapping("/recipes/favorite")
-    public String favoriteRecipe(@RequestParam(name="recipeID") long id) {
+    public String favoriteRecipe(@RequestParam(name="recipeID") long id, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = userRepository.getOne(user.getId());
         Recipe recipe = recipeRepository.getOne(id);
 
         if(user.getUsersFavorites().contains(recipe)) {
-            System.out.println("Old Recipe");
             user.getUsersFavorites().remove(recipe);
         }
         else {
-            System.out.println("New Recipe");
             user.getUsersFavorites().add(recipe);
-            System.out.println(user.getUsersFavorites().toString());
         }
         userRepository.save(user);
 
