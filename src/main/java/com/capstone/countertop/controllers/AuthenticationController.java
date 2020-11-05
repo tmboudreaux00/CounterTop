@@ -50,6 +50,7 @@ public class AuthenticationController {
         user.setPassword(hash);
         user.setUsername(user.getUsername().toLowerCase());
         user.setEmail(user.getEmail().toLowerCase());
+        user.setUrl(user.getUrl());
         LocalDate date = LocalDate.now();
         java.util.Date birthdate = java.sql.Date.valueOf(LocalDate.parse(birth));
         java.util.Date date1 = java.sql.Date.valueOf(date);
