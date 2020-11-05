@@ -8,7 +8,9 @@
 
     <h1 class="py-5 mx-auto text-center">Create a Recipe!</h1>
 
-    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}" style="background-color: white">
+
+    <form th:action="@{/recipes/create}" method="post" class="shadow w-50 p-3 mx-auto" th:object="${recipe}" id="createForm" style="background-color: white;">
+        <input type="hidden" id="trueIngredients" name="trueIngredients">
         <div class="form-group">
             <label for="name">Recipe Title</label>
             <input type="text" class="form-control" id="name" th:field="*{name}">
@@ -18,15 +20,15 @@
             <input type="text" th:field="*{description}" id="description" class="form-control">
         </div>
         <div class="form-group">
-            <label for="instructions">Recipe Instructions (Not Implemented Yet)</label>
-            <textarea id="instructions" class="form-control"></textarea>
+            <label for="instructions">Recipe Instructions</label>
+            <textarea id="instructions" th:field="*{instructions}"></textarea>
         </div>
         <div class="form-group" id="ingredients">
-            <label>Ingredients</label>
-            <input type="text" name="ingredient-0">
+            <label id="ingredient-label" for="ingredient-0">Ingredients</label>
+            <br>
+            <input type="text" name="ingredient-0" id="ingredient-0">
         </div>
         <div class="form-group">
-<!--            <label for="url">Add an Image </label>-->
             <input type="hidden" th:field="*{url}" id="url" class="form-control">
         </div>
         <div class="form-group">
@@ -64,6 +66,8 @@
             client.picker(options).open();
         }
     </script>
+
+    <script th:src="@{/js/form.js}"></script>
 
 </body>
 </html>

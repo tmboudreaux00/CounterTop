@@ -25,11 +25,7 @@
             </div>
             <div class="col-4">
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item" th:each="ingredient : ${recipe.getRecipesIngredients()}"><span th:text="${ingredient.getName()}">INGREDIENT</span></li>
                 </ul>
             </div>
         </div>
@@ -37,9 +33,10 @@
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/recipes/favorite}" method="post">
             <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-            <button type="submit" value="submit">
+            <button>
+                <i class="far fa-star" th:if="${favorited}"></i>
+                <i class="fas fa-star" th:if="${not favorited}"></i>
             </button>
-            <input type="submit" value="favorite">
         </form>
     </div>
 
