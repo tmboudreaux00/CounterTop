@@ -119,7 +119,7 @@
 
                         <div class="my-2" id="profilePhotoGroup">
                             <div class="bg-dark border my-2" id="profileImg" style="min-height: 300px; min-width: 300px; position: relative;">
-                                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" src="..." alt="Profile Photo" />
+                                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);" th:src="${#authentication.getPrincipal().getUrl()}" alt="Profile Photo" />
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-primary" type="submit" value="Edit" style="width: 75px;">Edit</button>
