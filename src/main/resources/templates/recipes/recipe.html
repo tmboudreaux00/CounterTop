@@ -50,8 +50,8 @@
         <form th:action="@{/recipes/favorite}" method="post">
             <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
             <button>
-                <i class="far fa-star" th:if="${favorited}"></i>
-                <i class="fas fa-star" th:if="${not favorited}"></i>
+                <i class="fas fa-star" th:if="${favorited}"></i>
+                <i class="far fa-star" th:if="${not favorited}"></i>
             </button>
         </form>
     </div>
