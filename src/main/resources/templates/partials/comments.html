@@ -1,13 +1,60 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <standard_links th:fragment="comments">
 
-    <div id="userComments" sec:authorize="isAuthenticated()">
-        <form th:action="@{/comment}" method="post" th:object="${comment}" id="newComment">
-            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-            <label for="commentBody">Feel free to leave feedback!</label><br />
-            <textarea th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="500" rows="5" cols="50" placeholder="This recipe is AMAZING!"></textarea><br />
-            <button type="submit" class="btn btn-primary">Submit</button><br />
-        </form>
+<!--    <div id="userComments" sec:authorize="isAuthenticated()">-->
+<!--        <form th:action="@{/comment}" method="post" th:object="${comment}" id="newComment">-->
+<!--            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">-->
+<!--            <label for="commentBody">Feel free to leave feedback!</label><br />-->
+<!--            <textarea th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="500" rows="5" cols="50" placeholder="Write a comment..."></textarea><br />-->
+<!--            <button type="submit" class="btn btn-primary">Submit</button><br />-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div th:each="item : ${comments}">-->
+<!--        <p th:text="${item.getCommentBody()}">COMMENT HERE</p>-->
+<!--        <p>- <span th:text="${item.getUser().getUsername()}"></span></p>-->
+<!--    </div>-->
+
+    <div class="container">
+        <div class="row bootstrap snippets bootdeys">
+            <div class="col-md-8 col-sm-12">
+                <div class="comment-wrapper">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Comment panel
+                        </div>
+                        <div class="panel-body">
+                            <div id="userComments" sec:authorize="isAuthenticated()">
+                                <form th:action="@{/comment}" method="post" th:object="${comment}" id="newComment">
+                                    <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+                                    <label for="commentBody">Feel free to leave feedback!</label><br />
+                                    <textarea class="form-control" th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="500" rows="5" cols="50" placeholder="Write a comment..."></textarea><br />
+                                    <button type="submit" class="btn btn-primary">Post</button><br />
+                                </form>
+                            </div>
+                            <br>
+                            <div class="clearfix"></div>
+                            <hr>
+                            <ul class="media-list">
+                                <li class="media" th:each="item : ${comments}">
+                                    <a href="#" class="pull-left" style="padding-right: 10px;">
+                                        <img th:src="${item.getUser().getUrl()}" alt="My Profile" class="rounded-circle" style="object-fit: cover; height: 50px; width: 50px;"/>
+                                    </a>
+                                    <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                        <strong class="text-success" th:text="${item.getUser().getUsername()}"></strong>
+                                        <p th:text="${item.getCommentBody()}">
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </standard_links>
