@@ -111,8 +111,12 @@ public class UserController {
     }
 
     @GetMapping("/users/favorites")
-    public String userFavorites(){
+    public String showFavorites(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = userDao.getOne(user.getId());
+        System.out.println(user.getUsersFavorites());
+        model.addAttribute("favorites", user.getUsersFavorites());
 
-        return "users/favorites";
+        return "/users/favorites";
     }
 }
