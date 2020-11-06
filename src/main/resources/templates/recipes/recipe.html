@@ -30,21 +30,6 @@
             </div>
         </div>
 
-<!--<<<<<<< HEAD-->
-<!--        <h4>Comments</h4>-->
-
-<!--        &lt;!&ndash;    <div class="form-group" th:se>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <label for="exampleFormControlTextarea1">Leave a comment!</label>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>&ndash;&gt;-->
-<!--        &lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--        <div th:replace="partials/comments :: comments"></div>-->
-        <!--        <div th:each="item : ${comments}">-->
-        <!--            <p th:text="${item.getCommentBody()}">COMMENT HERE</p>-->
-        <!--            <p>- <span th:text="${item.getUser().getUsername()}"></span></p>-->
-        <!--        </div>-->
-<!--=======-->
-
 
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/recipes/favorite}" method="post">
