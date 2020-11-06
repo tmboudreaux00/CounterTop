@@ -113,10 +113,6 @@ public class UserController {
     @GetMapping("/users/favorites")
     public String userFavorites(){
 
-
-
-
-
         return "users/favorites";
     }
 }

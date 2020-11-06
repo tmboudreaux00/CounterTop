@@ -6,9 +6,9 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
+<h1 class="py-5 mx-auto text-center">The Chef</h1>
 
-<div class="container-fluid mx-4" style="background-color: rgba(255, 255, 255, 0.5);">
+<div class="mx-auto w-75 justify-content-around" style="background-color: white;">
     <h4 class="my-3 text-center" id="theChef" th:text="${user.getUsername()}">The Chef</h4>
     <!-- PROFILE INFORMATION -->
 
@@ -16,8 +16,8 @@
 
         <!-- PROFILE PHOTO -->
         <div class="my-2">
-            <div class="bg-dark border my-2" style="min-height: 300px; min-width: 300px; position: relative;">
-                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);"  th:src="${user.getUrl()}" alt="Profile Photo" />
+            <div class="bg-light border my-2" style="min-height: 300px; min-width: 300px; position: relative;">
+                <img class="border rounded-circle d-inline-flex" style="object-fit: cover; height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);"  th:src="${user.getUrl()}" alt="Profile Photo" />
             </div>
         </div>
 

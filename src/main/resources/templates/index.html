@@ -26,7 +26,7 @@
                 <div class="card-body" style="height: 280px;">
                     <h5 class="card-title" th:text="${recipe.name}"></h5>
                     <p class="card-text " th:text="${recipe.description}"></p>
-                    <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary">Checkout this recipe!</a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="btn btn-primary" >Checkout this recipe!</a>
                 </div>
             </div>
             <div class="card my-3" style="width: 18rem;">

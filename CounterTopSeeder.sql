@@ -142,3 +142,14 @@ VALUES (true, 11, 1),
        (true, 11, 4),
        (true, 11, 5),
        (true, 11, 6);
+
+INSERT INTO users_favorites(user_id, recipe_id)
+VALUES (3, 2),
+       (3, 3),
+       (3, 4),
+       (3, 5),
+       (3, 6),
+       (3, 7),
+       (3, 8),
+       (3, 9);
+

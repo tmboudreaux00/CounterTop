@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head (title='Register')">
+    <div th:replace="partials/links :: links"></div>
+</head>
+<nav th:replace="partials/navbar :: navbar"></nav>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
+<div class="container-fluid mx-4" th:object="${session.user}" style="background-color: white;">
+    <!-- RECIPE INFORMATION -->
+    <div class="my-4">
+        <h4 class="mt-3 text-center" id="theRecipes">My Favorites</h4>
+        <!-- Row 1 -->
+        <div class="d-flex justify-content-around my-4 w-100">
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Row 2 -->
+        <div class="d-flex justify-content-around my-4 w-100">
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Row 3 -->
+        <div class="d-flex justify-content-around my-4 w-100">
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

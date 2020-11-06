@@ -24,5 +24,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query("FROM Recipe r WHERE r.description LIKE %:term%")
     List<Recipe> searchByDescriptionLike(@Param("term") String term);
 
+    
+
 
 }
