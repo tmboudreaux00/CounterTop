@@ -61,6 +61,7 @@ public class Api {
             ApiRecipe recipe = new ApiRecipe();
             recipe.setId((long) object.get("id"));
             recipe.setImage((String) object.get("image"));
+//            System.out.println("image");
             recipe.setTitle((String) object.get("title"));
             recipe.setDescription((String) object.get("summary"));
             recipe.setInstructions((String) object.get("instructions"));

@@ -8,40 +8,40 @@
 
     <br>
     <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
+            <div class="row">
+                <div class="col-4">
+                    <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
+                </div>
+                <div class="col-4">
+                    <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>
+                </div>
             </div>
-            <div class="col-4">
-                <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>
+            <div class="row">
+                <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="object-fit: cover; height: 500px; width: 500px; border: 1px solid black;">
             </div>
-        </div>
-        <div class="row">
-            <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="height: 500px; width: 500px; border: 1px solid black;">
-        </div>
-        <div class="row mt-2">
-            <div class="col-8" th:text="${recipe.getDescription()}">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
+            <div class="row mt-2">
+                <div class="col-8" th:text="${recipe.getDescription()}">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
+                </div>
+                <div class="col-4">
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="ingredient : ${recipe.getRecipesIngredients()}"><span th:text="${ingredient.getName()}">INGREDIENT</span></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-4">
-                <ul class="list-group">
-                    <li class="list-group-item" th:each="ingredient : ${recipe.getRecipesIngredients()}"><span th:text="${ingredient.getName()}">INGREDIENT</span></li>
-                </ul>
-            </div>
-        </div>
 
 
-    <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/recipes/favorite}" method="post">
-            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-            <button>
-                <i class="fas fa-star" th:if="${favorited}"></i>
-                <i class="far fa-star" th:if="${not favorited}"></i>
-            </button>
-        </form>
-    </div>
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/recipes/favorite}" method="post">
+                    <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorite</i>
+                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorited</i>
+                    </button>
+                </form>
+            </div>
 
-    <div th:replace="partials/comments :: comments"></div>
+            <div th:replace="partials/comments :: comments"></div>
 
     </div>
 
