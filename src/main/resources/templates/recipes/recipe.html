@@ -4,47 +4,157 @@
     <div th:replace="partials/links :: links"></div>
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<!--<div class="container w-100 " style="width: 100%;height: 250px;" >-->
+<!--    <img src="../images/cutting_block.jpg" style="max-width: 100%;height: auto;object-fit: cover;">-->
 
-    <br>
+
+<!--</div>-->
+
+<br>
+<!-- Recipe Start -->
+<div class="section section-padding single-post-1">
     <div class="container">
-            <div class="row">
-                <div class="col-8">
-                    <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
+
+        <div class="row">
+            <div class="col-lg-8">
+
+                <!-- Content Start -->
+                <article class="post-single">
+                    <div class="post-thumbnail" style="">
+                        <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="border-radius: 25px;object-fit: cover; height: 500px; width: 1000px;">
+                        <!--                            <img src="https://via.placeholder.com/1280x700" alt="post">-->
+                    </div>
+                    <br>
+                    <h2 class="play" th:text="${recipe.getName()}"></h2>
+                    <h6 class="sans">- Created by user <span class="sans" th:text="${recipe.getUser().getUsername()}"></span></h6>
+                    <div sec:authorize="isAuthenticated()">
+                        <form th:action="@{/recipes/favorite}" method="post">
+                            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>
+                                <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>
+                            </button>
+                        </form>
+                    </div>
+                    <p class="sans" th:text="${recipe.getDescription()}"></p>
+                    <div class="post-content">
+                        <div class="recipe-ingredients">
+                            <h4 class="play">Ingredients</h4>
+                            <ul >
+                                <li  th:each="ingredient : ${recipe.getRecipesIngredients()}">
+                                    <span th:text="${ingredient.getName()}"class="sans">INGREDIENT</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="recipe-instructions">
+                            <h4 class="play">Instructions</h4>
+                            <ul>
+                                <li>
+                                    <h5>Step 1</h5>
+                                    <p>
+                                        Combine together the flour, sugar (or sweetener), baking powder, baking soda, and salt in a large-sized bowl.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h5>Step 2</h5>
+                                    <p>
+                                        Make a well in the centre and whisk in the milk, slightly cooled melted butter, vanilla and egg. Whisk in the pumpkin puree until smooth.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h5>Step 3</h5>
+                                    <p>
+                                        Heat a nonstick pan or griddle over low-medium heat and wipe over with a little butter to lightly grease pan.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h5>Step 4</h5>
+                                    <p>
+                                        Pour 1⁄4 cup of batter onto the pan and spread out gently into a round shape with the back of your ladle or measuring cup. When the underside is golden and bubbles begin to
+                                        appear on the surface, flip with a spatula and cook until golden. Repeat with remaining batter.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h5>Step 5</h5>
+                                    <p>
+                                        Serve with your choice of topping.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div th:replace="partials/comments :: comments"></div>
+
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4">
+                <br>
+                <h2 class="play">Featured Recipes</h2>
+                <br>
+                <div class="post-thumbnail thumbnail text-center" style="">
+                    <img th:src="${featured.getUrl()}" class="img-fluid" alt="Responsive image" style="border-radius: 25px;object-fit: cover; height: 200px; width: 500px;">
+                    <div class="caption">
+                        <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="party centered" th:text="${featured.name}"></a>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>
+                <br>
+                <br>
+                <div class="post-thumbnail thumbnail text-center" style="">
+                    <img th:src="${featured2.getUrl()}" class="img-fluid" alt="Responsive image" style="border-radius: 25px;object-fit: cover; height: 200px; width: 500px;">
+                    <div class="caption ">
+                        <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="party centered" th:text="${featured2.name}"></a>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="object-fit: cover; height: 500px; width: 500px; border: 1px solid black;">
-            </div>
-            <div class="row mt-2">
-                <div class="col-8" th:text="${recipe.getDescription()}">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
-                </div>
-                <div class="col-4">
-                    <ul class="list-group">
-                        <li class="list-group-item" th:each="ingredient : ${recipe.getRecipesIngredients()}"><span th:text="${ingredient.getName()}">INGREDIENT</span></li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <div sec:authorize="isAuthenticated()">
-                <form th:action="@{/recipes/favorite}" method="post">
-                    <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>
-                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>
-                    </button>
-                </form>
-            </div>
-
-            <div th:replace="partials/comments :: comments"></div>
-
+        </div>
     </div>
+</div>
 
-    <div th:replace="partials/scripts :: scripts"></div>
+
+
+
+                <!--    <div class="container">-->
+                <!--            <div class="row">-->
+                <!--                <div class="col-8">-->
+                <!--                    <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>-->
+                <!--                </div>-->
+                <!--                <div class="col-8">-->
+                <!--                    <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--            <div class="row">-->
+                <!--                <img th:src="${recipe.getUrl()}" class="img-fluid" alt="Responsive image" style="object-fit: cover; height: 500px; width: 500px; border: 1px solid black;">-->
+                <!--            </div>-->
+                <!--            <div class="row mt-2">-->
+                <!--                <div class="col-8" th:text="${recipe.getDescription()}">-->
+                <!--                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?-->
+                <!--                </div>-->
+                <!--                <div class="col-4">-->
+                <!--                    <ul class="list-group">-->
+                <!--                        <li class="list-group-item" th:each="ingredient : ${recipe.getRecipesIngredients()}"><span th:text="${ingredient.getName()}">INGREDIENT</span></li>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
+                <!--            </div>-->
+
+
+<!--                            <div sec:authorize="isAuthenticated()">-->
+<!--                                <form th:action="@{/recipes/favorite}" method="post">-->
+<!--                                    <input type="hidden" th:value="${recipe.getId()}" name="recipeID">-->
+<!--                                    <button class="btn btn-primary">-->
+<!--                                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>-->
+<!--                                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>-->
+<!--                                    </button>-->
+<!--                                </form>-->
+<!--                            </div>-->
+
+                            <div th:replace="partials/comments :: comments"></div>
+
+                <!--    </div>-->
+
+
+                <div th:replace="partials/scripts :: scripts"></div>
 </body>
 </html>

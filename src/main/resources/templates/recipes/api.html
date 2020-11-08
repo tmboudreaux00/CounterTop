@@ -55,7 +55,7 @@
                     <div class="post-content">
                         <div class="recipe-ingredients">
                             <h4>Ingredients</h4>
-                            <ul >
+                            <ul>
                                 <li  th:each="ingredient : ${recipe.getIngredientList()}">
                                     <h6  th:text="${ingredient.getName()}"></h6>
                                 </li>

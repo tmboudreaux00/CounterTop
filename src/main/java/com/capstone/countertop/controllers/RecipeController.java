@@ -51,6 +51,13 @@ public class RecipeController {
 
     @GetMapping("/recipes/{id}")
     public String showRecipe(@PathVariable long id, Model model, Principal user) {
+
+        Recipe featured = recipeRepository.getOne((long) 4);
+        model.addAttribute("featured", featured);
+
+        Recipe featured2 = recipeRepository.getOne((long) 5);
+        model.addAttribute("featured2", featured2);
+
         model.addAttribute("recipe", recipeRepository.getOne(id));
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
@@ -150,5 +157,6 @@ public class RecipeController {
 
         return "recipes/api";
     }
+
 
 }
