@@ -41,8 +41,8 @@
                     <div class="post-content">
                         <div class="recipe-ingredients">
                             <h4 class="play">Ingredients</h4>
-                            <ul >
-                                <li  th:each="ingredient : ${recipe.getRecipesIngredients()}">
+                            <ul>
+                                <li th:each="ingredient : ${recipe.getRecipesIngredients()}">
                                     <span th:text="${ingredient.getName()}"class="sans">INGREDIENT</span>
                                 </li>
 
@@ -140,17 +140,8 @@
                 <!--            </div>-->
 
 
-<!--                            <div sec:authorize="isAuthenticated()">-->
-<!--                                <form th:action="@{/recipes/favorite}" method="post">-->
-<!--                                    <input type="hidden" th:value="${recipe.getId()}" name="recipeID">-->
-<!--                                    <button class="btn btn-primary">-->
-<!--                                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>-->
-<!--                                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>-->
-<!--                                    </button>-->
-<!--                                </form>-->
-<!--                            </div>-->
 
-                            <div th:replace="partials/comments :: comments"></div>
+
 
                 <!--    </div>-->
 
