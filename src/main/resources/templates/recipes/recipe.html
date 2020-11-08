@@ -10,6 +10,7 @@
 
 
 <!--</div>-->
+<nav class="subheader navbar navbar-expand-lg navbar-light bg-light topnav shadow-sm" style="height: 170px;"></nav>
 
 <br>
 <!-- Recipe Start -->
@@ -26,30 +27,29 @@
                         <!--                            <img src="https://via.placeholder.com/1280x700" alt="post">-->
                     </div>
                     <br>
-                    <h2 class="play" th:text="${recipe.getName()}"></h2>
+                    <h1 class="play" th:text="${recipe.getName()}"></h1>
                     <h6 class="sans">- Created by user <span class="sans" th:text="${recipe.getUser().getUsername()}"></span></h6>
                     <div sec:authorize="isAuthenticated()">
                         <form th:action="@{/recipes/favorite}" method="post">
                             <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-                            <button class="btn btn-primary">
-                                <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>
-                                <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>
+                            <button class="btn btn-danger" style="background-color: rgba(221,52,68,.3); border-radius: 15px;">
+                                <i class="fas fa-star btn sans text-danger" th:if="${favorited}"><h5 class="text-danger">Favorited</h5></i>
+                                <i class="far fa-star btn sans text-danger" th:if="${not favorited}"><h5 class="text-danger">Favorite</h5></i>
                             </button>
                         </form>
                     </div>
                     <p class="sans" th:text="${recipe.getDescription()}"></p>
                     <div class="post-content">
                         <div class="recipe-ingredients">
-                            <h4 class="play">Ingredients</h4>
+                            <h3 class="play">Ingredients</h3>
                             <ul>
                                 <li th:each="ingredient : ${recipe.getRecipesIngredients()}">
                                     <span th:text="${ingredient.getName()}"class="sans">INGREDIENT</span>
                                 </li>
-
                             </ul>
                         </div>
                         <div class="recipe-instructions">
-                            <h4 class="play">Instructions</h4>
+                            <h3 class="play">Instructions</h3>
                             <ul>
                                 <li>
                                     <h5>Step 1</h5>

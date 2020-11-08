@@ -23,11 +23,19 @@
 <!--                            Comment panel-->
                         </div>
                         <div class="panel-body">
+                            <div id="viwerComments" sec:authorize="!isAuthenticated()">
+                                <form>
+                                    <input type="hidden" >
+                                    <h3 for="commentBody" class="play">Leave a Reply</h3><br />
+                                    <textarea style="border-width:1px;" class="form-control border border-secondary rounded"  form="newComment" maxlength="" rows="5" cols="50" placeholder="Write a comment..."></textarea><br />
+                                    <a class="btn btn-primary" href="/login">Post</a><br />
+                                </form>
+                            </div>
                             <div id="userComments" sec:authorize="isAuthenticated()">
                                 <form th:action="@{/comment}" method="post" th:object="${comment}" id="newComment">
                                     <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-                                    <label for="commentBody">Feel free to leave feedback!</label><br />
-                                    <textarea class="form-control" th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="500" rows="5" cols="50" placeholder="Write a comment..."></textarea><br />
+                                    <h3 for="commentBody" class="play">Leave a Reply</h3><br />
+                                    <textarea style="border-width:1px;" class="form-control border border-secondary rounded" th:field="*{commentBody}" id="commentBody" form="newComment" maxlength="" rows="5" cols="50" placeholder="Write a comment..."></textarea><br />
                                     <button type="submit" class="btn btn-primary">Post</button><br />
                                 </form>
                             </div>

@@ -147,6 +147,12 @@ public class RecipeController {
 
     @GetMapping("/recipes/api/{id}")
     public String getApiRecipe(@PathVariable long id, Model model) {
+
+        Recipe featured2 = recipeRepository.getOne((long) 5);
+        Recipe featured = recipeRepository.getOne((long) 7);
+        model.addAttribute("featured2", featured2);
+        model.addAttribute("featured", featured);
+
         try {
             model.addAttribute("recipe",Api.getRecipe("https://api.spoonacular.com/recipes/"+ id +"/information?includeNutrition=false"));
             model.addAttribute("comment", new Comment());
@@ -157,6 +163,5 @@ public class RecipeController {
 
         return "recipes/api";
     }
-
 
 }

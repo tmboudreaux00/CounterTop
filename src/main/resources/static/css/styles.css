@@ -1,4 +1,9 @@
-
+.subheader {
+    background-image: url("../images/cutting_block.jpg");
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+}
 
 .thumbnail {
     position: relative;
@@ -10112,7 +10117,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .btn {
     font-size: 0.765625rem;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .btn-sm, .btn-group-sm > .btn {
@@ -10152,8 +10157,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    /*text-transform: uppercase;*/
+    letter-spacing: 1px;
 }
 
 .text-secondary {
