@@ -44,6 +44,11 @@ public class RecipeController {
         return "recipes/index";
     }
 
+    @GetMapping("/newRecipe")
+    public String newRecipe(){
+        return "recipes/newRecipe";
+    }
+
     @GetMapping("/recipes/{id}")
     public String showRecipe(@PathVariable long id, Model model, Principal user) {
         model.addAttribute("recipe", recipeRepository.getOne(id));

@@ -9,10 +9,10 @@
     <br>
     <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-8">
                     <h1 th:text="${recipe.getName()}">RECIPE TITLE</h1>
                 </div>
-                <div class="col-4">
+                <div class="col-8">
                     <h6>- Created by user <span th:text="${recipe.getUser().getUsername()}"></span></h6>
                 </div>
             </div>
@@ -35,8 +35,8 @@
                 <form th:action="@{/recipes/favorite}" method="post">
                     <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
                     <button class="btn btn-primary">
-                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorite</i>
-                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorited</i>
+                        <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>
+                        <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>
                     </button>
                 </form>
             </div>
