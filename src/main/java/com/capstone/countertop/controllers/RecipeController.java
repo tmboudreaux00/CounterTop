@@ -8,6 +8,8 @@ import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +55,8 @@ public class RecipeController {
 //            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
         return "recipes/recipe";
     }
+
+
 
     @GetMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable long id) {

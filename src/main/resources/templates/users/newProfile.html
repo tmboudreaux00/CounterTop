@@ -4,86 +4,83 @@
     <div th:replace="partials/links :: links"></div>
 </head>
 <body>
+<style>
+
+
+
+
+</style>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <h1 class="py-5 mx-auto text-center">Join us on the Counter top!</h1>
 
-<div class="container-fluid mx-4" style="background-color: rgba(255, 255, 255, 0.5);">
-    <h4 class="my-3 text-center" id="theChef" th:text="${user.getUsername()}">The Chef</h4>
+<div class="border mx-4 py-3 translucent-gray">
+    <h4 class="my-3 header-text text-center" id="theChef" th:text="${user.getUsername()}">The Chef</h4>
+    <hr class="w-25" style="background-color: whitesmoke;" />
     <!-- PROFILE INFORMATION -->
 
-    <div class="border col d-flex">
+    <div class="col d-flex">
 
         <!-- PROFILE PHOTO -->
         <div class="my-2">
-            <div class="bg-dark border my-2" style="min-height: 300px; min-width: 300px; position: relative;">
-                <img class="border rounded-circle d-inline-flex" style="height: 250px; width: 250px; position: absolute; top: calc(50% - 125px); right: calc(50% - 125px);"  th:src="${user.getUrl()}" alt="Profile Photo" />
+            <div class="border my-2 photo-container smokey-gray">
+                <img class="border rounded-circle d-inline-flex photo-style" th:src="${user.getUrl()}" alt="Profile Photo" />
             </div>
         </div>
 
-        <!-- USERNAME & EMAIL -->
-        <div class="col border d-flex ml-3 my-auto py-2">
-            <div class="col">
 
-                <div class="my-4 w-100" id="profileUsernameGrp">
+        <div class="col border d-flex details-container ml-3 my-auto py-2 smokey-gray">
+            <!-- USERNAME & EMAIL -->
+            <div class="col my-auto">
+                <div class="col m-4 w-100" id="profileUsernameGrp">
+
                     <div>
-                        <span class="align-middle"> Username </span>
+                        <span class="align-middle font-weight-bold label-text text-uppercase"> Username </span>
                     </div>
-                    <div class="d-flex">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${user.getUsername()}"> SuperChef </span>
-                        </div>
+                    <div class="border details-field user-details w-100">
+                        <span class="ml-1 label-text" th:text="${user.getUsername()}"> SuperChef </span>
                     </div>
+
                 </div>
 
 
-                <div class="my-4 w-100" id="profileEmailGrp">
+                <div class="col m-4 w-100" id="profileEmailGrp">
                     <div>
-                        <span class="align-middle"> Email </span>
+                        <span class="align-middle font-weight-bold label-text text-uppercase"> Email </span>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
-                        </div>
+
+                    <div class="border details-field user-details w-100">
+                        <span class="ml-1 label-text" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
                     </div>
                 </div>
 
             </div>
 
             <!-- SIGN UP DATE & DOB -->
-            <div class="col">
-
-                <div class="my-4 w-100" id="profileSignUpGrp">
+            <div class="col my-auto">
+                <div class="col m-4 w-100" id="profileSignUpGrp">
                     <div>
-                        <span class="align-middle"> Member Since </span>
+                        <span class="align-middle font-weight-bold label-text text-uppercase"> Member Since </span>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="border w-100" style="background-color: white;">
-                            <span class="ml-1 userDetails" th:text="${user.getSignupDate()}">10/28/2000</span>
-                        </div>
-                        <div class="ml-1"><div style="width: 75px; height: 40px;"></div>
-                        </div>
+                    <div class="border details-field user-details w-100">
+                        <span class="ml-1 label-text" th:text="${user.getSignupDate()}"> 10/28/2000 </span>
                     </div>
-
-                    <div class="my-4 w-100" id="profileDOBGrp">
-                        <div>
-                            <span class="align-middle"> Birthday </span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="border w-100" style="background-color: white;">
-                                <span class="ml-1 userDetails" th:text="${user.getDob()}"> 11/12/2020 </span>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-            <div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
+
+                <div class="col m-4 w-100" id="profileDOBGrp">
+                    <div>
+                        <span class="align-middle font-weight-bold label-text text-uppercase"> Birthday </span>
+                    </div>
+                    <div class="border details-field label-text user-details w-100">
+                        <span class="ml-1 user-details" th:text="${user.getDob()}"> 11/12/2020 </span>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="mr-5 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,23 +93,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/user/update}" method="POST" class="shadow w-50 p-3 mx-auto" style="background-color: white">
+                    <form th:action="@{/user/update}" method="POST" class="shadow w-100 p-3 mx-auto" style="background-color: white">
                         <input type="hidden" name="id" th:value="${user.getId()}">
                         <div class="form-group">
-                            <label for="email">Email address</label>
+                            <label class="label-text" for="email">Email Address</label>
                             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:value="${user.getEmail()}" name="email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label class="label-text" for="username">Username</label>
                             <input type="text" class="form-control" id="username" th:value="${user.getUsername()}" name="username">
                         </div>
                         <div class="form-group">
-                            <label for="password_old">Old Password</label>
+                            <label class="label-text" for="password_old">Old Password</label>
                             <input type="password" class="form-control" id="password_old" name="password_old">
                         </div>
                         <div class="form-group">
-                            <label for="password_new">New Password</label>
+                            <label class="label-text" for="password_new">New Password</label>
                             <input type="password" class="form-control" id="password_new" name="password_new">
                         </div>
                         <div class="form-group">
@@ -123,22 +120,103 @@
                         </div>
                         <p id="added"></p>
                         <div class="form-group">
-                            <label for="date">Date of Birth</label>
+                            <label class="label-text" for="date">Date of Birth</label>
                             <input type="date" class="form-control" th:value="${user.getDob()}" id="date" name="date">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
 </div>
+<!--SPACER / MODAL CONTENTS-->
+<!--<div class="w-100" style="height: 100px;"></div>-->
+
+<!--        <h1 th:text="${recipe.name}"> Recipe Name </h1>-->
+<!--        <p th:text="${recipe.description}"> Recipe Description </p>-->
+
+
+<div class="container-fluid mx-4" style="background-color: white;">
+
+    <div class="my-4">
+        <h4 class="mt-3 text-center" id="theRecipes">The Recipes</h4>
+
+        <div class="d-flex justify-content-around my-4 w-100" th:each="recipe : ${page}">
+
+            <div class="border col d-flex mx-2 p-0">
+                <div class="col d-flex">
+                    <div class="border ml-0 my-auto" style="width: 75px; height: 75px;"><img src="..." alt="recipe thumbnail" /></div>
+                    <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Edit">Edit</button></div>
+                    <div class="my-4"><button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button></div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
+    <nav class="text-center">
+        <ul class="pagination">
+            <li th:class="${page.isFirst()}? 'disabled' : ''">
+                <span th:if='${page.isFirst()}'>← First</span>
+                <a th:if='${not page.isFirst()}' th:href="'?page=0'">
+                    ← First
+                </a>
+            </li>
+            <li th:class="${page.hasPrevious()}? '' : 'disabled'">
+                <span th:if='${not page.hasPrevious()}'>«</span>
+                <a
+                        th:if='${page.hasPrevious()}'
+                        th:href="'?page=' + ${page.getNumber() - 1}"
+                        title='Go to previous page'
+                >
+                    «
+                </a>
+            </li>
+
+            <li th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                <span
+                        th:if='${(i - 1) == param.page}'
+                        th:text='${i}'>
+                    1
+                </span>
+                <a
+                        th:if='${not ((i - 1) == param.page)}'
+                        th:href="'?page=' + ${(i -1)}"
+                >
+                    <span th:text='${i}'>1</span>
+                </a>
+            </li>
+            <li th:class="${page.hasNext()} ? '' : 'disabled'">
+                <span th:if='${not page.hasNext()}'>»</span>
+                <a
+                        th:if='${page.hasNext()}'
+                        th:href="'?page=' + ${page.getNumber() + 1}"
+                        title='Go to next page'
+                >
+                    »
+                </a>
+            </li>
+            <li th:class="${page.isLast()}? 'disabled' : ''">
+                <span th:if='${page.isLast()}'>Last →</span>
+                <a
+                        th:if='${not page.isLast()}'
+                        th:href="'?page=' + ${page.getTotalPages() - 1}"
+                >
+                    Last →
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
 
 <div th:replace="partials/scripts :: scripts"></div>
+<!-- PLACE BELOW SCRIPT IN PARTIALS -->
 <script>
     var client = filestack.init("AFTklBXEQve8miEwbGlAwz");
     //The function pickMark()
@@ -158,5 +236,6 @@
         client.picker(options).open();
     }
 </script>
+
 </body>
 </html>

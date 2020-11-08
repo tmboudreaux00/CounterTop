@@ -1,6 +1,9 @@
 package com.capstone.countertop.controllers;
 
+import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +20,14 @@ import java.time.LocalDate;
 public class UserController {
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
+    private final RecipeRepository recipeDao;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.recipeDao = recipeDao;
+
     }
 
 
@@ -39,12 +46,14 @@ public class UserController {
 //    }
 
     @GetMapping("user/profile")
-    public String showProfile(Model model) {
+    public String showProfile(Model model, @PageableDefault(value=9) Pageable pageable) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", userDao.getOne(user.getId()));
-
+        model.addAttribute("page", recipeDao.findAllByUser(user, pageable));
         return "users/newProfile";
     }
+
+
 
 //    @GetMapping("user/{id}")
 //    public String showUser(@PathVariable long id, Model model) {
@@ -86,6 +95,9 @@ public class UserController {
         model.addAttribute("user", userDao.findAll());
         return "redirect:/profile";
     }
+
+
+
     //CHANGES END
 
     @GetMapping("/users/register")
