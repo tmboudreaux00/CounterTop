@@ -6,33 +6,105 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
+<!--  &lt;!&ndash; Subheader Start &ndash;&gt;-->
+<!--  <div class="subheader bg-cover dark-overlay dark-overlay-2" style="background-image: url('https://via.placeholder.com/1920x1280')">-->
+<!--    <div class="container">-->
+<!--      <div class="subheader-inner">-->
+<!--        <h1>Recipe Details</h1>-->
+<!--        <nav aria-label="breadcrumb">-->
+<!--          <ol class="breadcrumb">-->
+<!--            <li class="breadcrumb-item"><a href="#">Home</a></li>-->
+<!--            <li class="breadcrumb-item"><a href="#">Recipes</a></li>-->
+<!--            <li class="breadcrumb-item active" aria-current="page">Recipe Details</li>-->
+<!--          </ol>-->
+<!--        </nav>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<div class="container w-100 bg-secondary" style="height: 250px;opacity: 0.5;" >
+
+
+</div>
 <br>
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <h1 th:text="${recipe.getTitle()}"></h1>
+
+<div class="section section-padding single-post-1">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+
+                <!-- Content Start -->
+                <article class="post-single">
+                    <div class="post-thumbnail">
+                        <img th:src="${recipe.getImage()}" class="img-fluid rounded" alt="Responsive image" style="object-fit: cover; height: 500px; width: 1000px;">
+                        <!--                            <img src="https://via.placeholder.com/1280x700" alt="post">-->
+                    </div>
+                    <br>
+                    <h2 th:text="${recipe.getTitle()}"></h2>
+                    <h6>- Provided by <span>Spoonacular</span></h6>
+<!--                    <div sec:authorize="isAuthenticated()">-->
+<!--                        <form th:action="@{/recipes/favorite}" method="post">-->
+<!--                            <input type="hidden" th:value="${recipe.getId()}" name="recipeID">-->
+<!--                            <button class="btn btn-primary">-->
+<!--                                <i class="fas fa-star btn btn-primary" th:if="${favorited}">Favorited</i>-->
+<!--                                <i class="far fa-star btn btn-primary" th:if="${not favorited}">Favorite</i>-->
+<!--                            </button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+                    <p th:utext="${recipe.getDescription()}" style="font-size: 1.1rem;color: black;" class="text-justify"></p>
+                    <div class="post-content">
+                        <div class="recipe-ingredients">
+                            <h4>Ingredients</h4>
+                            <ul >
+                                <li  th:each="ingredient : ${recipe.getIngredientList()}">
+                                    <h6  th:text="${ingredient.getName()}"></h6>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="recipe-instructions">
+                            <h4>Instructions</h4>
+                            <div class="row">
+                                <div class="col-8" th:utext="${recipe.getInstructions()}"></div>
+                            </div>
+                        </div>
+                        <div th:replace="partials/comments :: comments"></div>
+                    </div>
+                </article>
+            </div>
         </div>
-        <div class="col-8">
-            <h6>- Provided by <span>Spoonacular</span></h6>
-        </div>
-    </div>
-    <div class="row">
-        <img th:src="${recipe.getImage()}" class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 50%; height: auto;m">
-    </div>
-    <div class="row mt-2">
-        <div class="col-8" th:utext="${recipe.getDescription()}">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?
-        </div>
-        <div class="col-4">
-            <ul class="list-group">
-                <li class="list-group-item" th:each="ingredient : ${recipe.getIngredientList()}"><span th:text="${ingredient.getName()}">DYLAN</span></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12" th:utext="${recipe.getInstructions()}"></div>
     </div>
 </div>
+
+
+
+
+
+<!--                <div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-8">-->
+<!--            <h1 th:text="${recipe.getTitle()}"></h1>-->
+<!--        </div>-->
+<!--        <div class="col-8">-->
+<!--            <h6>- Provided by <span>Spoonacular</span></h6>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <img th:src="${recipe.getImage()}" class="img-fluid" alt="Responsive image" style="border: 1px solid black; width: 50%; height: auto;m">-->
+<!--    </div>-->
+<!--    <div class="row mt-2">-->
+<!--        <div class="col-8" th:utext="${recipe.getDescription()}">-->
+<!--            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi distinctio dolore eius, iure minus quos ut? Accusamus aliquam aperiam deleniti dignissimos dolorum error, explicabo illo laboriosam sed totam?-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <ul class="list-group">-->
+<!--                <li class="list-group-item" th:each="ingredient : ${recipe.getIngredientList()}"><span th:text="${ingredient.getName()}">DYLAN</span></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-12" th:utext="${recipe.getInstructions()}"></div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div th:replace="partials/scripts :: scripts"></div>
 </body>
