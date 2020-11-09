@@ -15,10 +15,12 @@
 <!--    <img class="subheaderImg" src="../images/countertop.jpg" style="max-height: 100%;">-->
 <!--</div>-->
 <main>
-    <div class="header-img"></div>
+    <div class="header-img shadow-sm d-flex" style="align-items: center;">
+        <h1 class="text-center mx-auto" >RECIPE DETAILS</h1>
+    </div>
 </main>
-
-
+<br>
+<br>
 <br>
 <!-- Recipe Start -->
 <div class="section section-padding single-post-1">
@@ -58,9 +60,10 @@
                     <div class="post-content">
                         <div class="recipe-ingredients">
                             <h3 class="play">Ingredients</h3>
-                            <ul>
-                                <li th:each="ingredient : ${recipe.getRecipesIngredients()}">
-                                    <span th:text="${ingredient.getName()}"class="sans">INGREDIENT</span>
+                            <ul class="fa-ul">
+                                <li th:each="ingredient : ${recipe.getRecipesIngredients()}" style="padding: 5px;">
+                                    <i class="fas fa-utensils"></i>
+                                    <span th:text="${ingredient.getName()}"class="sans" >INGREDIENT</span>
                                 </li>
                             </ul>
                         </div>

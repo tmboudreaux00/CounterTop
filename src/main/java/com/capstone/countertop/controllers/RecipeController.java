@@ -88,11 +88,13 @@ public class RecipeController {
     public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients, @RequestParam(name="instructions") String instructions) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
+
         List<Ingredient> list = Help.parseIngredients(ingredients);
         for(Ingredient ingredient : list) {
             ingredientRepository.save(ingredient);
         }
         recipe.setRecipesIngredients(list);
+
         LocalDate now = LocalDate.now();
         java.util.Date date = java.sql.Date.valueOf(now);
         recipe.setDatePublished(date);
