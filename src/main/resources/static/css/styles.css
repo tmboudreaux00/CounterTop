@@ -1,6 +1,10 @@
-.newBg {
-    background-image: url('../images/countertop.jpg');
-    max-width: 100%;
+.header-img {
+    width: 100%;
+    height: 180px;
+    background: url('../images/subheader.jpg');
+    background-size: cover;
+    /*opacity: 0.5;*/
+    /*box-shadow: 0 0 8px 8px white inset;*/
 }
 
 .subheader {
