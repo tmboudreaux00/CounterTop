@@ -165,7 +165,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label th:for="${'instructions' + recipeStat.count}">Recipe Instructions</label>
-                                            <textarea th:id="${'instructions' + recipeStat.count}" class="form-control" th:value="${recipe.instructions}" name="instructions"></textarea>
+                                            <input th:id="${'instructions' + recipeStat.count}" class="form-control" th:value="${recipe.instructions}" name="instructions">
                                         </div>
                                         <div class="form-group" th:id="${'ingredients' + recipeStat.count}">
                                             <label th:id="${'ingredient-label' + recipeStat.count}" th:for="${'ingredient-0' + recipeStat.count}">Ingredients</label>

@@ -57,7 +57,7 @@ public class UserController {
         User user = userDao.getOne(id);
         user.setUsername(username.toLowerCase());
         if (!password_old.isEmpty() && !password_new.isEmpty()) {
-            if(passwordEncoder.encode(password_old).equals(user.getPassword()))
+            if (passwordEncoder.encode(password_old).equals(user.getPassword()))
                 user.setPassword(passwordEncoder.encode(password_new));
         }
         user.setEmail(email);
@@ -69,10 +69,6 @@ public class UserController {
 
         return "redirect:/user/profile";
     }
-
-
-
-
 
     //CHANGES END
 
@@ -99,4 +95,14 @@ public class UserController {
 
         return "/users/favorites";
     }
+
+    @GetMapping("/about")
+    public String aboutUs(){
+        return "/aboutUs";
+    }
+
+
+
+
+
 }
