@@ -77,6 +77,7 @@ public class Recipe {
                   String url,
                   Date datePublished,
                   User user,
+                  String instructions,
                   List<Comment> comments,
                   List<User> users,
                   List<Like> likes,
@@ -89,6 +90,7 @@ public class Recipe {
         this.url = url;
         this.datePublished = datePublished;
         this.user = user;
+        this.instructions = instructions;
         this.comments = comments;
         this.users = users;
         this.likes = likes;
