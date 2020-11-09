@@ -1,8 +1,19 @@
-.subheader {
-    background-image: url("../images/cutting_block.jpg");
-    object-fit: cover;
+.newBg {
+    background-image: url('../images/countertop.jpg');
     max-width: 100%;
-    height: auto;
+}
+
+.subheader {
+    /*background-image: url("../images/countertop.jpg");*/
+    /*!*object-fit: contain;*!*/
+    /*height: 2000px;*/
+    /*width: 3000px;*/
+    background-color: rgba(108,117,125,.3);
+}
+
+.subheaderImg{
+    /*max-width: 100%;*/
+    /*object-fit: cover;*/
 }
 
 .thumbnail {

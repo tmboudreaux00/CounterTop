@@ -4,13 +4,19 @@
     <div th:replace="partials/links :: links"></div>
 </head>
 <body>
+
 <nav th:replace="partials/navbar :: navbar"></nav>
 <!--<div class="container w-100 " style="width: 100%;height: 250px;" >-->
 <!--    <img src="../images/cutting_block.jpg" style="max-width: 100%;height: auto;object-fit: cover;">-->
 
 
 <!--</div>-->
-<nav class="subheader navbar navbar-expand-lg navbar-light bg-light topnav shadow-sm" style="height: 170px;"></nav>
+<!--<div class="subheader bg-light" style="width: 100vw; height: 170px;background-color: rgba(108,117,126,.2) !important;">-->
+<!--    <h1 class="text-center play">Recipe Details</h1>-->
+<!--    <img class="subheaderImg" src="../images/countertop.jpg" style="max-height: 100%;">-->
+<!--</div>-->
+<img src="../images/subheader.jpeg;">
+
 
 <br>
 <!-- Recipe Start -->
@@ -27,17 +33,26 @@
                         <!--                            <img src="https://via.placeholder.com/1280x700" alt="post">-->
                     </div>
                     <br>
-                    <h1 class="play" th:text="${recipe.getName()}"></h1>
-                    <h6 class="sans">- Created by user <span class="sans" th:text="${recipe.getUser().getUsername()}"></span></h6>
                     <div sec:authorize="isAuthenticated()">
                         <form th:action="@{/recipes/favorite}" method="post">
                             <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
-                            <button class="btn btn-danger" style="background-color: rgba(221,52,68,.3); border-radius: 15px;">
-                                <i class="fas fa-star btn sans text-danger" th:if="${favorited}"><h5 class="text-danger">Favorited</h5></i>
-                                <i class="far fa-star btn sans text-danger" th:if="${not favorited}"><h5 class="text-danger">Favorite</h5></i>
+                            <button class="btn btn-danger text-left" style="background-color: rgba(221,52,68,.3); border-radius: 15px;">
+                                <i class="fas fa-star sans text-danger text-left" th:if="${favorited}"><span class="text-danger sans"> Favorited</span></i>
+                                <i class="far fa-star sans text-danger text-left" th:if="${not favorited}"><span class="text-danger sans"> Favorite</span></i>
                             </button>
                         </form>
                     </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <form>
+                            <input type="hidden"  name="recipeID">
+                            <a class="btn btn-danger text-left" style="background-color: rgba(221,52,68,.3); border-radius: 15px;" href="/login">
+                                <i class="far fa-star sans text-danger text-left"><span class="text-danger sans"> Favorite</span></i>
+                            </a>
+                        </form>
+                    </div>
+                    <br>
+                    <h1 class="play" th:text="${recipe.getName()}"></h1>
+                    <h6 class="sans">- Created by user <span class="sans" th:text="${recipe.getUser().getUsername()}"></span></h6>
                     <p class="sans" th:text="${recipe.getDescription()}"></p>
                     <div class="post-content">
                         <div class="recipe-ingredients">
