@@ -93,16 +93,12 @@ public class UserController {
         System.out.println(user.getUsersFavorites());
         model.addAttribute("favorites", user.getUsersFavorites());
 
-        return "/users/favorites";
+        return "users/favorites";
     }
 
     @GetMapping("/about")
     public String aboutUs(){
         return "aboutUs";
     }
-
-
-
-
 
 }
