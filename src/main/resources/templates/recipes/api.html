@@ -71,6 +71,17 @@
                         <a th:href="@{/recipes/{id}(id=${recipe.getId()})}" class="party centered"></a>
                     </div>
                 </div>
+
+                <div sec:authorize="isAuthenticated()">
+                    <form th:action="@{/recipes/favorite}" method="post">
+                        <input type="hidden" th:value="${recipe.getId()}" name="recipeID">
+                        <input type="hidden" th:value="${true}" name="apiRecipe">
+                        <button class="btn btn-danger text-left" style="background-color: rgba(221,52,68,.3); border-radius: 15px;">
+                            <i class="fas fa-star sans text-danger text-left" th:if="${favorited}"><span class="text-danger sans"> Favorited</span></i>
+                            <i class="far fa-star sans text-danger text-left" th:if="${not favorited}"><span class="text-danger sans"> Favorite</span></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -1,13 +1,7 @@
 package com.capstone.countertop.controllers;
 
-import com.capstone.countertop.models.Comment;
-import com.capstone.countertop.models.Ingredient;
-import com.capstone.countertop.models.Recipe;
-import com.capstone.countertop.models.User;
-import com.capstone.countertop.repositories.CommentRepository;
-import com.capstone.countertop.repositories.IngredientRepository;
-import com.capstone.countertop.repositories.RecipeRepository;
-import com.capstone.countertop.repositories.UserRepository;
+import com.capstone.countertop.models.*;
+import com.capstone.countertop.repositories.*;
 import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
 import com.capstone.countertop.services.Help;
@@ -20,8 +14,6 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
-import java.util.List;
-
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
@@ -29,13 +21,15 @@ public class RecipeController {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final CommentRepository commentRepository;
+    private final FavoriteRepository favoriteRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
+    public RecipeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository, FavoriteRepository favoriteRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.commentRepository = commentRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     @GetMapping("/recipes")
@@ -64,7 +58,7 @@ public class RecipeController {
         if(user != null) {
             User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             current = userRepository.getOne(current.getId());
-            model.addAttribute("favorited", current.getUsersFavorites().contains(recipeRepository.getOne(id)));
+            model.addAttribute("favorited", current.getUsersFavorites().contains(favoriteRepository.findFirstByRecipeIdEqualsAndApiRecipeEquals(id, false)));
         }
 
         return "recipes/recipe";
@@ -131,24 +125,35 @@ public class RecipeController {
 
 
     @PostMapping("/recipes/favorite")
-    public String favoriteRecipe(@RequestParam(name="recipeID") long id, Model model) {
+    public String favoriteRecipe(@RequestParam(name="recipeID") long id, @RequestParam(name="apiRecipe") boolean apiRecipe, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = userRepository.getOne(user.getId());
-        Recipe recipe = recipeRepository.getOne(id);
+        Favorite favorite = favoriteRepository.findFirstByRecipeIdEqualsAndApiRecipeEquals(id, apiRecipe);
 
-        if(user.getUsersFavorites().contains(recipe)) {
-            user.getUsersFavorites().remove(recipe);
+        if (favorite == null) {
+            System.out.println("NO FAVORITE FOUND");
+            favorite = new Favorite();
+            favorite.setApiRecipe(apiRecipe);
+            favorite.setRecipeId(id);
+            favoriteRepository.save(favorite);
         }
-        else {
-            user.getUsersFavorites().add(recipe);
+
+        if(user.getUsersFavorites().contains(favorite)) {
+            user.getUsersFavorites().remove(favorite);
+        } else {
+            user.getUsersFavorites().add(favorite);
         }
         userRepository.save(user);
 
-        return "redirect:/recipes/" + id;
+        if (apiRecipe) {
+            return "redirect:/recipes/api/" + id;
+        } else {
+            return "redirect:/recipes/" + id;
+        }
     }
 
     @GetMapping("/recipes/api/{id}")
-    public String getApiRecipe(@PathVariable long id, Model model) {
+    public String getApiRecipe(@PathVariable long id, Model model, Principal user) {
 
         Recipe featured2 = recipeRepository.getOne((long) 5);
         Recipe featured = recipeRepository.getOne((long) 7);
@@ -161,6 +166,12 @@ public class RecipeController {
             model.addAttribute("comments", commentRepository.findAllByRecipe(recipeRepository.getOne(id)));
         } catch(Exception e) {
             e.printStackTrace();
+        }
+
+        if(user != null) {
+            User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            current = userRepository.getOne(current.getId());
+            model.addAttribute("favorited", current.getUsersFavorites().contains(favoriteRepository.findFirstByRecipeIdEqualsAndApiRecipeEquals(id, true)));
         }
 
         return "recipes/api";
