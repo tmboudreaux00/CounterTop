@@ -29,35 +29,7 @@ VALUES
 
 
 #Seeds Recipes
-<<<<<<< HEAD
-INSERT INTO recipes (date_published, description, name, skill_level, url, user_id)
-VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'beginner', 'www.countertop.com', '5', 0),
-       (CURDATE(), 'Recipe #2 Description', 'Recipe #2', 'easy', 'www.countertop.com', '4', 0),
-       (CURDATE(), 'Recipe #3 Description', 'Recipe #3', 'medium', 'www.countertop.com', '3', 0),
-       (CURDATE(), 'Recipe #4 Description', 'Recipe #4', 'difficult', 'www.countertop.com', '2', 0),
-       (CURDATE(), 'Recipe #5 Description', 'Recipe #5', 'chef', 'www.countertop.com', '3', 0),
-       (CURDATE(), 'Recipe #6 Description', 'Recipe #6', 'beginner', 'www.countertop.com', '4', 0),
-       (CURDATE(), 'Recipe #7 Description', 'Recipe #7', 'easy', 'www.countertop.com', '5', 0),
-       (CURDATE(), 'Recipe #8 Description', 'Recipe #8', 'medium', 'www.countertop.com', '4', 0),
-       (CURDATE(), 'Recipe #9 Description', 'Recipe #9', 'difficult', 'www.countertop.com', '3', 0),
-       (CURDATE(), 'Recipe #10 Description', 'Recipe #10', 'chef', 'www.countertop.com', '2', 0);
 
-=======
-INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
-VALUES (CURDATE(), 'Recipe #1 Description', 'Recipe #1', 'yum', 'beginner', 'www.countertop.com', '5'),
-       (CURDATE(), 'Recipe #2 Description', 'Recipe #2', 'yum', 'easy', 'www.countertop.com', '4'),
-       (CURDATE(), 'Recipe #3 Description', 'Recipe #3', 'yum', 'medium', 'www.countertop.com', '3'),
-       (CURDATE(), 'Recipe #4 Description', 'Recipe #4', 'yum', 'difficult', 'www.countertop.com', '2'),
-       (CURDATE(), 'Recipe #5 Description', 'Recipe #5', 'yum', 'chef', 'www.countertop.com', '3'),
-       (CURDATE(), 'Recipe #6 Description', 'Recipe #6', 'yum', 'beginner', 'www.countertop.com', '4'),
-       (CURDATE(), 'Recipe #7 Description', 'Recipe #7', 'yum', 'easy', 'www.countertop.com', '5'),
-       (CURDATE(), 'Recipe #8 Description', 'Recipe #8', 'yum', 'medium', 'www.countertop.com', '4'),
-       (CURDATE(), 'Recipe #9 Description', 'Recipe #9', 'yum', 'difficult', 'www.countertop.com', '3'),
-       (CURDATE(), 'Recipe #10 Description', 'Recipe #10', 'yum', 'chef', 'www.countertop.com', '2'),
-       (CURDATE(), 'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
-        'Cacio e Pepe', 'yum', 'beginner', 'https://bit.ly/31KeydW', 3),
-       (CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'yum','Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 );
->>>>>>> 32812aabea45d788fd695d6e80df641e8d74f00a
 
 #Seeds Tags
 INSERT INTO tags (name)
@@ -109,39 +81,7 @@ VALUES
 ('This is delicious', CURDATE(), true, 3, 1, 1);
 
 
-ALTER TABLE recipes AUTO_INCREMENT = 1;
 
-INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
-VALUES
-<<<<<<< HEAD
-(CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'easy', 'https://bit.ly/37MQieW', 3 ),
-(CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'easy', 'https://bit.ly/35I9Jmo', 3),
-(CURDATE(), 'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
-    'Cacio e Pepe', 'beginner', 'https://bit.ly/31KeydW', 3),
-(CURDATE(), 'Do you love the flavor of saucy barbecue chicken but not the hours spent tending to the smoker? We’ve got you.',
- 'Smokehouse Pulled Chicken Bowls', 'beginner', 'https://bit.ly/31KeydW', 3);
-
-=======
-(CURDATE(), 'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food', 'Cilantro Lime Rice', 'yum', 'easy', 'https://bit.ly/37MQieW', 3 );
-
-INSERT INTO recipes (date_published, description, name, instructions, skill_level, url, user_id)
-VALUES
-(CURDATE(), 'This grilled mushroom and swiss cheese burger is the best burger you\'ll ever make and it\'s fairly simple.', 'Grilled Mushroom & Swiss Burger', 'yum','easy', 'https://bit.ly/35I9Jmo', 3 );
->>>>>>> 32812aabea45d788fd695d6e80df641e8d74f00a
-
-INSERT INTO ingredients (name)
-VALUES ('pecorino romano'),
-       ('pasta'),
-       ('black pepper'),
-       ('salt');
-
-INSERT INTO likes (liked, recipe_id, user_id)
-VALUES (true, 11, 1),
-       (true, 11, 2),
-       (true, 11, 3),
-       (true, 11, 4),
-       (true, 11, 5),
-       (true, 11, 6);
 
 INSERT INTO users_favorites(user_id, recipe_id)
 VALUES (3, 2),
@@ -152,4 +92,31 @@ VALUES (3, 2),
        (3, 7),
        (3, 8),
        (3, 9);
+
+ALTER TABLE recipes AUTO_INCREMENT = 1;
+
+INSERT INTO recipes(date_published, description, name, skill_level, url, user_id, instructions)
+VALUES (CURDATE(),'This Cilantro Lime Rice is super easy to make and better than Chipotle\'s and super easy to make! It goes great with Asian or Mexican food',
+        'Cilantro & Lime Rice','easy', 'https://bit.ly/37MQieW',3,'..'
+        ),
+       (CURDATE(),'This grilled mushroom and swiss cheese burger is the best burger you''ll ever make and it''s fairly simple.',
+        'Grilled Mushroom & Swiss Burger','easy','https://bit.ly/35I9Jmo',3,'..'),
+       (CURDATE(),'Cacio e Pepe is a pasta dish from modern Roman cuisine. "Cacio e pepe" means "cheese and pepper" in several central Italian dialects.',
+        'Cacio e Pepe','beginner','https://bit.ly/31KeydW',3,'..'),
+       (CURDATE(),'Do you love the flavor of saucy barbecue chicken but not the hours spent tending to the smoker? We’ve got you.',
+        'Smokehouse Pulled Chicken Bowls','beginner','../images/smokehouse-pulled-chicken-bowls-e6772b98.jpg',3,'..'),
+       (CURDATE(),'FreshFam, meet bavette steak! This lesser-known but ultra-flavorful cut of beef is sure to be your new fave. Grill it with salt and coarsely ground black pepper, top it with a zippy chimichurri, whip up some sizzling steak-centric fajitas, and on and on.',
+        'Bavette Steak','easy','https://cdn.filestackcontent.com/C4MRw9N6RqqfHqiSr63U',3,'..'),
+       (CURDATE(),'This recipe is here to blow up everything you think you know about meatballs. All dramatics aside, these meatballs are truly game-changing thanks to a certain special sauce.',
+        'Firecracker Meatballs','medium','https://cdn.filestackcontent.com/1hzxxklTSaR18Z97s5fw',3,'..'),
+       (CURDATE(),'A big bowl of pasta never fails to satisfy—it’s quick, carby, comforting, and our go-to no matter the weather.',
+        'Pork Sausage Spaghetti Bolognese','hard','https://cdn.filestackcontent.com/kiu2VaqRQGGPZcJaPbHJ',3,'..'),
+       (CURDATE(),'Making a great sandwich is an art form. Dramatics aside—when you get it right, there’s really nothing better!',
+        'Prosciutto Caprese Sandwiches','easy','https://cdn.filestackcontent.com/lSIcHIAKROSlwiDtmWP5',3,'..'),
+       (CURDATE(),'Here is some awesome salmon seasoned with thyme that only takes about 20 minutes to cook.',
+        'Pan-Fried Thyme Salmon','medium','https://cdn.filestackcontent.com/oyIC5pnOTbCtVo2M3DVQ',3,'..'),
+       (CURDATE(),'It’s hard NOT to love any ingredient when it’s fritter-fied, aka covered in batter and cooked until perfectly golden. ',
+        'Spiced Chickpea Fritters','easy','https://cdn.filestackcontent.com/gtzhifs4QSyftw9QfVgQ', 4,'..'),
+       (CURDATE(),'This Cilantro Lime Rice is super easy to make and better than Chipotle''s and super easy to make! It goes great with Asian or Mexican food',
+        'Cilantro & Lime Rice','medium','https://cdn.filestackcontent.com/wEUHH7IET6aNjW3TfFdB', 4,'..');
 

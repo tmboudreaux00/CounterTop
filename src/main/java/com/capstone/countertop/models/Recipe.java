@@ -21,7 +21,7 @@ public class Recipe {
     private String description;
 
     @Column(nullable = false)
-    @Size(min = 4, max = 100)
+    @Size(min = 1, max = 100)
     private String name;
 
     @Column(nullable = false, columnDefinition = "TEXT")
