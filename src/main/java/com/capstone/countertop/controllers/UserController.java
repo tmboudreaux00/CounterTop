@@ -98,7 +98,7 @@ public class UserController {
 
     @GetMapping("/about")
     public String aboutUs(){
-        return "/aboutUs";
+        return "aboutUs";
     }
 
 
