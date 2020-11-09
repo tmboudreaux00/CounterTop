@@ -1,6 +1,9 @@
 package com.capstone.countertop.controllers;
 
+import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,41 +20,26 @@ import java.time.LocalDate;
 public class UserController {
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
+    private final RecipeRepository recipeDao;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.recipeDao = recipeDao;
+
     }
 
 
     //CHANGES
-//    @GetMapping("users/{id}")
-//    public String userProfilePage(@PathVariable long id, Model model){
-//        model.addAttribute("user", userDao.getOne(id));
-//        return "/users/profiles";
-//    }
-//
-//    @GetMapping("profile")
-//    public String profilePages(Model model){
-//        String username = "username";
-//        model.addAttribute("username", username);
-//        return "/users/myprofile";
-//    }
 
     @GetMapping("user/profile")
-    public String showProfile(Model model) {
+    public String showProfile(Model model, @PageableDefault(value=9) Pageable pageable) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", userDao.getOne(user.getId()));
-
+        model.addAttribute("page", recipeDao.findAllByUser(user, pageable));
         return "users/newProfile";
     }
-
-//    @GetMapping("user/{id}")
-//    public String showUser(@PathVariable long id, Model model) {
-//        model.addAttribute("user", userDao.getOne(id));
-//
-//        return "/users/newProfile";
-//    }
 
     @PostMapping("/user/update")
     public String updateUser(
@@ -79,13 +67,10 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
-    @Deprecated
-    @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
-        userDao.save(user);
-        model.addAttribute("user", userDao.findAll());
-        return "redirect:/profile";
-    }
+
+
+
+
     //CHANGES END
 
     @GetMapping("/users/register")

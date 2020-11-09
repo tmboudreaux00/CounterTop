@@ -95,6 +95,74 @@ body {
     background-image: url("../images/augustine-wong-li0iC0rjvvg-unsplash (1).jpg");
 }
 
+/** PROFILE **/
+
+.details-container {
+    height: 300px;
+}
+
+.details-field {
+    height: 40px;
+}
+
+.header-text {
+    font-size: 2em;
+}
+
+.label-text {
+    font-size: 1.5em;
+}
+
+/*#date, #email, #password_new, #password_old, #username {*/
+/*    border: solid #303030 1px;*/
+/*    background-color: whitesmoke;*/
+/*}*/
+
+.photo-container {
+    min-height: 300px;
+    min-width: 300px;
+    position: relative;
+}
+
+.photo-style {
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    top: calc(50% - 125px);
+    right: calc(50% - 125px);
+}
+
+.photo-thumb {
+    height: 75px;
+    width: 75px;
+    /*position: absolute;*/
+    /*top: calc(50% - 75px/2);*/
+    /*right: calc(50% - 75px/2);*/
+}
+
+.smokey-gray {
+    background-color: rgba(180, 180, 180, 0.25);
+}
+
+.translucent-gray {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.user-details {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+.white-borders {
+    border-color: white;
+    border-style: solid;
+    border-width: 5px;
+}
+
+/** END PROFILE **/
+
 [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
 }
