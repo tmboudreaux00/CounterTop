@@ -59,9 +59,9 @@ public class User {
     @JoinTable(
             name="users_favorites",
             joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="recipe_id")}
+            inverseJoinColumns={@JoinColumn(name="favorite_id")}
     )
-    private List<Recipe> usersFavorites = new ArrayList<>();
+    private List<Favorite> usersFavorites = new ArrayList<>();
 
 
     //join table for users_liked_recipes
@@ -110,7 +110,7 @@ public class User {
                 List<Recipe> recipes,
                 List<Comment> comments,
                 List<Like> likes,
-                List<Recipe> usersFavorites,
+                List<Favorite> usersFavorites,
                 List<Like> usersLikedRecipes,
                 List<Like> usersLikedComments) {
         this.id = id;
@@ -152,11 +152,11 @@ public class User {
         this.likes = likes;
     }
 
-    public List<Recipe> getUsersFavorites() {
+    public List<Favorite> getUsersFavorites() {
         return usersFavorites;
     }
 
-    public void setUsersFavorites(List<Recipe> usersFavorites) {
+    public void setUsersFavorites(List<Favorite> usersFavorites) {
         this.usersFavorites = usersFavorites;
     }
 
