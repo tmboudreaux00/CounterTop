@@ -13,6 +13,8 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
     Recipe getOne(Long id);
+
+    List<Recipe> findAllByUserId(User id);
     Page<Recipe> findAllByUser(User id, Pageable pageable);
 
     @Query("FROM Recipe r WHERE r.name LIKE %:term% OR r.description LIKE %:term%")

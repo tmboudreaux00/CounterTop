@@ -32,18 +32,6 @@ public class UserController {
 
 
     //CHANGES
-//    @GetMapping("users/{id}")
-//    public String userProfilePage(@PathVariable long id, Model model){
-//        model.addAttribute("user", userDao.getOne(id));
-//        return "/users/profiles";
-//    }
-//
-//    @GetMapping("profile")
-//    public String profilePages(Model model){
-//        String username = "username";
-//        model.addAttribute("username", username);
-//        return "/users/myprofile";
-//    }
 
     @GetMapping("user/profile")
     public String showProfile(Model model, @PageableDefault(value=9) Pageable pageable) {
@@ -52,15 +40,6 @@ public class UserController {
         model.addAttribute("page", recipeDao.findAllByUser(user, pageable));
         return "users/newProfile";
     }
-
-
-
-//    @GetMapping("user/{id}")
-//    public String showUser(@PathVariable long id, Model model) {
-//        model.addAttribute("user", userDao.getOne(id));
-//
-//        return "/users/newProfile";
-//    }
 
     @PostMapping("/user/update")
     public String updateUser(
@@ -88,13 +67,7 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
-    @Deprecated
-    @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
-        userDao.save(user);
-        model.addAttribute("user", userDao.findAll());
-        return "redirect:/profile";
-    }
+
 
 
 

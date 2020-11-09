@@ -1,13 +1,16 @@
 package com.capstone.countertop.controllers;
 
 import com.capstone.countertop.models.Comment;
+import com.capstone.countertop.models.Ingredient;
 import com.capstone.countertop.models.Recipe;
 import com.capstone.countertop.models.User;
 import com.capstone.countertop.repositories.CommentRepository;
+import com.capstone.countertop.repositories.IngredientRepository;
 import com.capstone.countertop.repositories.RecipeRepository;
 import com.capstone.countertop.repositories.UserRepository;
 import com.capstone.countertop.services.Api;
 import com.capstone.countertop.services.EmailService;
+import com.capstone.countertop.services.Help;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,12 +34,14 @@ public class RecipeController {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final CommentRepository commentRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository, IngredientRepository ingredientRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.commentRepository = commentRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     @GetMapping("/recipes")
@@ -68,7 +73,7 @@ public class RecipeController {
 
     @GetMapping("/recipes/create")
     public String createRecipeForm(Model model) {
-        model.addAttribute("recipe",new Recipe());
+        model.addAttribute("recipe", new Recipe());
         return "recipes/form";
     }
 
@@ -85,30 +90,48 @@ public class RecipeController {
         return "redirect:/recipes/";
     }
 
+    //CHANGES
     @GetMapping("/recipes/edit/{id}")
     public String editRecipeForm(@PathVariable long id, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Recipe recipe = recipeRepository.getOne(id);
         if (recipe == null)
             return "redirect:/recipes/index";
-        model.addAttribute("recipe",recipe);
-        return "recipes/form";
+        model.addAttribute("user", userRepository.getOne(user.getId()));
+        model.addAttribute("recipe", recipe);
+        return "users/newProfile";
     }
 
-    // This needs to be fleshed out more once form is fleshed out.
+    // This needs to be fleshed out more once form is fleshed out. CHANGE
     @PostMapping("/recipes/edit")
     public String editRecipe(
             @RequestParam(name="id") long id,
             @RequestParam(name="title") String name,
+            @RequestParam(name="recipe-url") String url,
             @RequestParam(name="description") String description,
-            Model model) {
+            @RequestParam(name="instructions") String instructions,
+            @RequestParam(name="skill") String skillLevel,
+            @RequestParam(name="ingredients") String ingredients
+
+    ) {
         Recipe recipe = recipeRepository.getOne(id);
         if (recipe == null)
-            return "redirect:/recipes/index";
+            return "redirect:/user/profile";
+        List<Ingredient> list = Help.parseIngredients(ingredients);
+        for(Ingredient ingredient : list) {
+            ingredientRepository.save(ingredient);
+        }
+        recipe.setRecipesIngredients(list);
         recipe.setName(name);
+        recipe.setUrl(url);
         recipe.setDescription(description);
+        recipe.setInstructions(instructions);
+        recipe.setSkillLevel(skillLevel);
+
         recipeRepository.save(recipe);
-        return "redirect:/recipes/";
+        return "redirect:/user/profile";
     }
+    //CHANGES END
 
 
     @PostMapping("/recipes/favorite")
