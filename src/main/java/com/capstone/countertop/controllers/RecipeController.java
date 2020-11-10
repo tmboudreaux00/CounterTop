@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,12 +24,8 @@ public class RecipeController {
     private final CommentRepository commentRepository;
     private final FavoriteRepository favoriteRepository;
 
-//<<<<<<< HEAD
-//
-//    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository, IngredientRepository ingredientRepository) {
-//=======
+
     public RecipeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, EmailService emailService, CommentRepository commentRepository, FavoriteRepository favoriteRepository) {
-//>>>>>>> api_favorites
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.userRepository = userRepository;
@@ -69,13 +66,13 @@ public class RecipeController {
         return "recipes/recipe";
     }
 
-
-
     @GetMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable long id) {
         Recipe recipe = recipeRepository.getOne(id);
+        recipe.setUser(recipeRepository.getOne(recipe.getId()).getUser());
         if (recipe != null)
             recipeRepository.delete(recipe);
+        recipeRepository.delete(recipe);
         return "redirect:/recipes";
     }
 
@@ -86,7 +83,10 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/create")
-    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name="trueIngredients") String ingredients, @RequestParam(name="instructions") String instructions) {
+    public String createRecipe(
+            @ModelAttribute Recipe recipe,
+            @RequestParam(name="trueIngredients") String ingredients,
+            @RequestParam(name="instructions") String instructions) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(user);
 
@@ -108,25 +108,24 @@ public class RecipeController {
     //CHANGES
     @GetMapping("/recipes/edit/{id}")
     public String editRecipeForm(@PathVariable long id, Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Recipe recipe = recipeRepository.getOne(id);
         if (recipe == null)
             return "redirect:/recipes/index";
-        model.addAttribute("user", userRepository.getOne(user.getId()));
         model.addAttribute("recipe", recipe);
-        return "users/newProfile";
+
+        return "recipes/edit";
     }
 
     // This needs to be fleshed out more once form is fleshed out. CHANGE
     @PostMapping("/recipes/edit")
     public String editRecipe(
             @RequestParam(name="id") long id,
-            @RequestParam(name="title") String name,
-            @RequestParam(name="recipe-url") String url,
+            @RequestParam(name="title", required = false) String name,
+            @RequestParam(name="url") String url,
             @RequestParam(name="description") String description,
             @RequestParam(name="instructions") String instructions,
             @RequestParam(name="skill") String skillLevel,
-            @RequestParam(name="ingredients") String ingredients
+            @RequestParam(name="ingredient") String ingredients
 
     ) {
         Recipe recipe = recipeRepository.getOne(id);
@@ -136,6 +135,8 @@ public class RecipeController {
         for(Ingredient ingredient : list) {
             ingredientRepository.save(ingredient);
         }
+
+
         recipe.setRecipesIngredients(list);
         recipe.setName(name);
         recipe.setUrl(url);
@@ -144,13 +145,14 @@ public class RecipeController {
         recipe.setSkillLevel(skillLevel);
 
         recipeRepository.save(recipe);
+        System.out.println(ingredients);
         return "redirect:/user/profile";
     }
     //CHANGES END
 
 
     @PostMapping("/recipes/favorite")
-    public String favoriteRecipe(@RequestParam(name="recipeID") long id, @RequestParam(name="apiRecipe") boolean apiRecipe, Model model) {
+    public String favoriteRecipe(@RequestParam(name="recipeID") long id, @RequestParam(name="apiRecipe") boolean apiRecipe) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = userRepository.getOne(user.getId());
         Favorite favorite = favoriteRepository.findFirstByRecipeIdEqualsAndApiRecipeEquals(id, apiRecipe);
