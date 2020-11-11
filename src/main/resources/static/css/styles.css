@@ -1,4 +1,33 @@
 /** PROFILE **/
+@media (min-width: 1200px) {
+    .h-xl-300 {
+        height: 300px !important;
+    }
+    .user-details {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        background-color: whitesmoke;
+    }
+}
+
+@media (min-width: 992px) {
+    .h-custom-auto {
+        height: auto; !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .user-details {
+        min-height: 80px;
+        display: inline-flex;
+        align-items: center;
+        background-color: whitesmoke;
+    }
+    .h-custom-auto {
+        height: auto; !important;
+    }
+}
 
 .details-container {
     height: 300px;
@@ -52,13 +81,6 @@
 
 .translucent-gray {
     background-color: rgba(255, 255, 255, 0.5);
-}
-
-.user-details {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
-    background-color: whitesmoke;
 }
 
 .white-borders {

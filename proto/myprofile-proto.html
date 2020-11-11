@@ -8,182 +8,216 @@
 
 <body class="pt-5">
 
-<div class="border mx-4 py-3 translucent-gray">
-    <h1 class="my-3 header-text text-center" id="theChef">The Chef</h1>
-    <hr class="w-25" style="background-color: whitesmoke;" />
-    <!-- PROFILE INFORMATION -->
-    <div class="col d-flex">
-        <!-- PROFILE PHOTO -->
-        <div class="my-2">
-            <div class="border my-2 photo-container smokey-gray">
-                <img class="border rounded-circle d-inline-flex photo-style userPhoto" th:src="${user.getUrl()}" alt="Profile Photo" style="object-fit: cover;"/>
+
+    <!-- PROFILE DETAILS -->
+    <div class="border mx-4 my-3 py-3 shadow translucent-gray">
+        <div>
+            <h1 class="my-3 header-text text-center" id="theChef">The Chef</h1>
+            <hr class="w-25" style="background-color: whitesmoke;" />
+        </div>
+        <!-- PROFILE INFORMATION -->
+        <div class="col d-xl-flex">
+            <!-- PROFILE PHOTO -->
+            <div class="my-2">
+                <div class="border mx-auto my-4 my-xl-2 photo-container shadow smokey-gray w-25">
+                    <img class="border rounded-circle d-inline-flex photo-style userPhoto" th:src="${user.getUrl()}" alt="Profile Photo" style="object-fit: cover;"/>
+                </div>
+            </div>
+            <div class="col border d-lg-flex h-custom-auto h-xl-300 mx-auto ml-xl-3 my-4 my-lg-auto py-2 shadow smokey-gray w-75">
+                <!-- USERNAME & EMAIL -->
+                <div class="col d-xs-flex d-md-block my-auto">
+                    <div class="col mx-auto my-4 w-100" id="profileUsernameGrp">
+                        <div>
+                            <span class="align-middle font-weight-bold label-text text-uppercase"> Username </span>
+                        </div>
+                        <div class="border details-field user-details w-100">
+                            <span class="ml-1 label-text" th:text="${user.getUsername()}"> SuperChef </span>
+                        </div>
+                    </div>
+                    <div class="col mx-auto my-4 w-100" id="profileEmailGrp">
+                        <div>
+                            <span class="align-middle font-weight-bold label-text text-uppercase"> Email </span>
+                        </div>
+                        <div class="border details-field user-details w-100">
+                            <span class="ml-1 label-text" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIGN UP DATE & DOB -->
+                <div class="col my-auto">
+                    <div class="col mx-auto my-4 w-100" id="profileSignUpGrp">
+                        <div>
+                            <span class="align-middle font-weight-bold label-text text-uppercase"> Member Since </span>
+                        </div>
+                        <div class="border details-field user-details w-100">
+                            <span class="ml-1 label-text" th:text="${#dates.format(user.getSignupDate(), 'MM-dd-yyyy')}"> 10/28/2000 </span>
+                        </div>
+                    </div>
+                    <div class="col mx-auto my-4 w-100" id="profileDOBGrp">
+                        <div>
+                            <span class="align-middle font-weight-bold label-text text-uppercase"> Birthday </span>
+                        </div>
+                        <div class="border details-field label-text user-details w-100">
+                            <span class="ml-1 user-details" th:text="${#dates.format(user.getDob(), 'MM-dd-yyyy')}"> 11/12/2020 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col mt-4 mt-xl-1 text-center text-xl-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit Profile</button>
+        </div>
+    </div>
+
+    <!--SPACER / MODAL CONTENTS-->
+    <div class="w-100" style="height: 100px;">
+        <!-- EDIT PROFILE MODAL -->
+        <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userEditModalLabel">Edit Profile</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/user/update}" method="POST" class="shadow w-100 p-3 mx-auto" style="background-color: white">
+                            <input type="hidden" name="id" th:value="${user.getId()}">
+                            <div class="form-group">
+                                <label class="label-text" for="email">Email Address</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:value="${user.getEmail()}" name="email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="label-text" for="username">Username</label>
+                                <input type="text" class="form-control" id="username" th:value="${user.getUsername()}" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label class="label-text" for="password_old">Old Password</label>
+                                <input type="password" class="form-control" id="password_old" name="password_old">
+                            </div>
+                            <div class="form-group">
+                                <label class="label-text" for="password_new">New Password</label>
+                                <input type="password" class="form-control" id="password_new" name="password_new">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" th:value="${user.getUrl()}" name="url" id="url0" class="form-control url">
+                            </div>
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary mx-auto" value="Upload an Image" id="pickWatermark" th:onclick="'javascript:pickMark(0)'">
+                            </div>
+                            <p id="added0"></p>
+                            <div class="form-group">
+                                <label class="label-text" for="date">Date of Birth</label>
+                                <input type="date" class="form-control" th:value="${user.getDob()}" id="date" name="date">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECIPES -->
+    <div class="border mx-4 my-2 py-3 shadow translucent-gray">
+        <h1 class="my-3 header-text text-center" id="theRecipes">The Recipes</h1>
+        <hr class="w-25" style="background-color: whitesmoke;" />
+
+        <!-- Row 1 -->
+        <div class="col my-4">
+            <div class="col d-xl-flex justify-content-around">
+                <div class="border col-xl-4 d-flex mb-3 mb-md-0 mx-auto mx-xl-2 p-0 profile-recipe shadow smokey-gray h-custom-auto" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 1" th:unless="${recipeStat.count} >= 4">
+                    <div class="d-flex w-100">
+                        <div class="col d-flex">
+                            <div class="border ml-0 my-auto photo-thumb shadow">
+                                <img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" />
+                            </div>
+                            <div class="border col justify-content-center ml-3 my-auto p-0 shadow text-center user-details">
+                                <a class="text-decoration-none w-100" th:href="@{/recipes/{id}(id=${recipe.id})}">
+                                    <span class="align-middle label-text text-center text-uppercase user-details" th:text="${recipe.name}">Recipe Name That Is Quite Long And Has No Food</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="my-4">
+                                <a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a>
+                            </div>
+                            <div class="my-4">
+                                <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
+                                    <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col border d-flex details-container ml-3 my-auto py-2 smokey-gray">
-            <!-- USERNAME & EMAIL -->
-            <div class="col my-auto">
-                <div class="col m-4 w-100" id="profileUsernameGrp">
-                    <div>
-                        <span class="align-middle font-weight-bold label-text text-uppercase"> Username </span>
-                    </div>
-                    <div class="border details-field user-details w-100">
-                        <span class="ml-1 label-text" th:text="${user.getUsername()}"> SuperChef </span>
-                    </div>
-                </div>
-                <div class="col m-4 w-100" id="profileEmailGrp">
-                    <div>
-                        <span class="align-middle font-weight-bold label-text text-uppercase"> Email </span>
-                    </div>
-                    <div class="border details-field user-details w-100">
-                        <span class="ml-1 label-text" th:text="${user.getEmail()}"> SuperChef@thesuperchef.com </span>
+        <!--  Row 2-->
+        <div class="col my-4">
+            <div class="col d-xl-flex justify-content-around">
+                <div class="border col-xl-4 d-flex mb-3 mb-md-0 mx-auto mx-xl-2 p-0 profile-recipe shadow smokey-gray h-custom-auto" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 4" th:unless="${recipeStat.count} >= 7">
+                    <div class="d-flex w-100">
+                        <div class="col d-flex">
+                            <div class="border ml-0 my-auto photo-thumb shadow">
+                                <img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" />
+                            </div>
+                            <div class="border col justify-content-center ml-3 my-auto p-0 shadow text-center user-details">
+                                <a class="text-decoration-none w-100" th:href="@{/recipes/{id}(id=${recipe.id})}">
+                                    <span class="align-middle label-text text-center text-uppercase user-details" th:text="${recipe.name}">Recipe Name That Is Quite Long And Has No Food</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="my-4">
+                                <a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a>
+                            </div>
+                            <div class="my-4">
+                                <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
+                                    <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- SIGN UP DATE & DOB -->
-            <div class="col my-auto">
-                <div class="col m-4 w-100" id="profileSignUpGrp">
-                    <div>
-                        <span class="align-middle font-weight-bold label-text text-uppercase"> Member Since </span>
-                    </div>
-                    <div class="border details-field user-details w-100">
-                        <span class="ml-1 label-text" th:text="${#dates.format(user.getSignupDate(), 'MM-dd-yyyy')}"> 10/28/2000 </span>
-                    </div>
-                </div>
-                <div class="col m-4 w-100" id="profileDOBGrp">
-                    <div>
-                        <span class="align-middle font-weight-bold label-text text-uppercase"> Birthday </span>
-                    </div>
-                    <div class="border details-field label-text user-details w-100">
-                        <span class="ml-1 user-details" th:text="${#dates.format(user.getDob(), 'MM-dd-yyyy')}"> 11/12/2020 </span>
+        <!-- Row 3 -->
+        <div class="col my-4">
+            <div class="col d-xl-flex justify-content-around">
+                <div class="border col-xl-4 d-flex mb-3 mb-md-0 mx-auto mx-xl-2 p-0 profile-recipe shadow smokey-gray h-custom-auto" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 7">
+                    <div class="d-flex w-100">
+                        <div class="col d-flex">
+                            <div class="border ml-0 my-auto photo-thumb shadow">
+                                <img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" />
+                            </div>
+                            <div class="border col justify-content-center ml-3 my-auto p-0 shadow text-center user-details">
+                                <a class="text-decoration-none w-100" th:href="@{/recipes/{id}(id=${recipe.id})}">
+                                    <span class="align-middle label-text text-center text-uppercase user-details" th:text="${recipe.name}">Recipe Name That Is Quite Long And Has No Food</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="my-4">
+                                <a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a>
+                            </div>
+                            <div class="my-4">
+                                <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
+                                    <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit Profile</button>
-    </div>
-
-</div>
-
-
-<!--SPACER / MODAL CONTENTS-->
-<div class="w-100" style="height: 100px;">
-    <!-- EDIT PROFILE MODAL -->
-    <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userEditModalLabel">Edit Profile</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form th:action="@{/user/update}" method="POST" class="shadow w-100 p-3 mx-auto" style="background-color: white">
-                        <input type="hidden" name="id" th:value="${user.getId()}">
-                        <div class="form-group">
-                            <label class="label-text" for="email">Email Address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:value="${user.getEmail()}" name="email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label class="label-text" for="username">Username</label>
-                            <input type="text" class="form-control" id="username" th:value="${user.getUsername()}" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label class="label-text" for="password_old">Old Password</label>
-                            <input type="password" class="form-control" id="password_old" name="password_old">
-                        </div>
-                        <div class="form-group">
-                            <label class="label-text" for="password_new">New Password</label>
-                            <input type="password" class="form-control" id="password_new" name="password_new">
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" th:value="${user.getUrl()}" name="url" id="url0" class="form-control url">
-                        </div>
-                        <div class="form-group">
-                            <input type="button" class="btn btn-primary mx-auto" value="Upload an Image" id="pickWatermark" th:onclick="'javascript:pickMark(0)'">
-                        </div>
-                        <p id="added0"></p>
-                        <div class="form-group">
-                            <label class="label-text" for="date">Date of Birth</label>
-                            <input type="date" class="form-control" th:value="${user.getDob()}" id="date" name="date">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- RECIPES -->
-
-
-
-<div class="border mx-4 py-3 translucent-gray">
-    <h1 class="my-3 header-text text-center" id="theRecipes">The Recipes</h1>
-    <hr class="w-25" style="background-color: whitesmoke;" />
-    <!-- Row 1 -->
-    <div class="col d-flex mx-auto my-4 w-100">
-        <div class="border col-4 d-flex mx-2 p-0 smokey-gray" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 1" th:unless="${recipeStat.count} >= 4">
-            <div class="col d-flex">
-                <div class="border ml-0 my-auto photo-thumb"><img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" /></div>
-                <div class="border col ml-3 my-auto text-center details-field"><span class="align-middle user-details" th:text="${recipe.name}">Recipe Name</span></div>
-            </div>
-            <div class="col-3">
-                <div class="my-4"><a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a></div>
-                <div class="my-4">
-                    <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
-                        <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--  Row 2-->
-    <div class="d-flex justify-content-around my-4 w-100">
-        <div class="border col-4 d-flex mx-2 p-0 smokey-gray" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 4" th:unless="${recipeStat.count} >= 7">
-            <div class="col d-flex">
-                <div class="border ml-0 my-auto"><img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" /></div>
-                <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
-            </div>
-            <div class="col-3">
-                <div class="my-4"><a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a></div>
-                <div class="my-4">
-                    <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
-                        <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Row 3 -->
-    <div class="d-flex justify-content-around my-4 w-100">
-        <div class="border col-4 d-flex mx-2 p-0 smokey-gray" th:each="recipe : ${page}" th:if="${recipeStat.count} >= 7">
-            <div class="col d-flex">
-                <div class="border ml-0 my-auto"><img class="photo-thumb" th:src="${recipe.url}" alt="recipe thumbnail" /></div>
-                <div class="border col ml-3 my-auto text-center"><span class="align-middle" th:text="${recipe.name}" style="height: 50px;">Recipe Name</span></div>
-            </div>
-            <div class="col-3">
-                <div class="my-4"><a class="btn btn-primary w-100" type="submit" value="Edit" th:href="${'/recipes/edit/' + recipe.id}">Edit</a></div>
-                <div class="my-4">
-                    <form th:action="@{'/recipes/delete/' + ${recipe.id}}">
-                        <button class="btn btn-primary w-100" type="submit" value="Delete">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+    <!-- SCRIPTS FOR PROTO -->
     <div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
