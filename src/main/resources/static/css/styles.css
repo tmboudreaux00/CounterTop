@@ -3,12 +3,6 @@
     .h-xl-300 {
         height: 300px !important;
     }
-    .user-details {
-        min-height: 40px;
-        display: inline-flex;
-        align-items: center;
-        background-color: whitesmoke;
-    }
 }
 
 @media (min-width: 992px) {
@@ -18,12 +12,6 @@
 }
 
 @media (min-width: 576px) {
-    .user-details {
-        min-height: 80px;
-        display: inline-flex;
-        align-items: center;
-        background-color: whitesmoke;
-    }
     .h-custom-auto {
         height: auto; !important;
     }
@@ -83,10 +71,11 @@
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.white-borders {
-    border-color: white;
-    border-style: solid;
-    border-width: 5px;
+.user-details {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    background-color: whitesmoke;
 }
 
 /** END PROFILE **/
