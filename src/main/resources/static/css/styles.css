@@ -9,23 +9,26 @@
     .h-custom-auto {
         height: auto; !important;
     }
-    .profile-recipe-btn {
-
-    }
 }
 
 @media (min-width: 576px) {
     .h-custom-auto {
         height: auto; !important;
     }
-    .profile-recipe-btn {
+}
 
-    }
+.about-link {
+    color: rgba(0, 0, 0, 0.3);
 }
 
 .about-link:hover {
     color: black; !important;
-    text-decoration: none; !important;
+}
+
+.btn-custom-outline:focus, .btn-custom-outline:active {
+    outline: #222; !important;
+    box-shadow: 0 0 0 2px #222; !important;
+
 }
 
 .details-container {
@@ -49,6 +52,10 @@
     font-size: 1.5em;
 }
 
+.navbar-custom-collapse {
+    margin-right: 250px;
+}
+
 .navbar-custom-icon {
     display: inline-block;
     width: 1.5em;
@@ -57,7 +64,6 @@
     background: no-repeat center center url("../images/favicon-32x32.png") ;
     background-size: 100% 100%;
 }
-
 
 .photo-container {
     min-height: 300px;
@@ -4507,7 +4513,7 @@ input[type="button"].btn-block {
     width: 1.5em;
     height: 1.5em;
     vertical-align: middle;
-    content: url("");
+    content: "";
     background: no-repeat center center;
     background-size: 100% 100%;
 }
